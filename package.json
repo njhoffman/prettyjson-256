@@ -1,0 +1,35 @@
+{
+  "name": "prettyjson-256",
+  "version": "1.0.0",
+  "description": "JSON Pretty Print in 256 colors with extras",
+  "main": "lib/prettyjson.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "jshint": "jshint lib/*.js",
+    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+  },
+  "keywords": [
+    "json",
+    "prettyjson",
+    "256",
+    "printjson",
+    "inspect"
+  ],
+  "bin" : {
+	  "prettyjson256" : "./bin/prettyjson256"
+  },
+  "author": "Nick Hoffman",
+  "license": "ISC",
+  "dependencies": {
+    "ansi-256-colors": "^1.1.0",
+    "lodash": "^4.8.2",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "jshint": "^2.9.1"
+  }
+}
