@@ -8,7 +8,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
     "test": "better-npm-run test",
-    "test:watch": "npm run test -- -- watch"
+    "test:watch": "npm run test -- --watch"
   },
   "betterScripts": {
     "test": {
@@ -22,18 +22,22 @@
     "printjson",
     "inspect"
   ],
-  "bin" : {
-	  "prettyjson256" : "./bin/prettyjson256"
+  "bin": {
+    "prettyjson256": "./bin/prettyjson256"
   },
   "author": "Nick Hoffman",
   "license": "ISC",
   "dependencies": {
     "ansi-256-colors": "^1.1.0",
+    "fs": "0.0.1-security",
     "lodash": "^4.8.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "path": "^0.12.7",
+    "vm": "^0.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -41,7 +45,11 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
+    "babelify": "^7.3.0",
     "better-npm-run": "0.0.15",
+    "browserify": "^14.3.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-babel": "^4.1.1",
@@ -51,8 +59,21 @@
     "eslint-plugin-standard": "^3.0.1",
     "eslint-watch": "^3.1.0",
     "karma": "^1.6.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-browserify": "^5.1.1",
     "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.3",
-    "mocha": "^3.2.0"
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
+    "karma-webpack-with-fast-source-maps": "^1.10.1",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
+    "watchify": "^3.9.0",
+    "webpack": "^1.12.14",
+    "yargs": "^7.1.0"
   }
 }
