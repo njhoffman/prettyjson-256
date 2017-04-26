@@ -8,7 +8,7 @@
     "promise"
   ],
   "env": {
-    "browser" : true
+    "browser" : false
   },
   "globals": {
     "__DEV__"      : false,
