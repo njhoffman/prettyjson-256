@@ -1,4 +1,5 @@
-# prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status]
+# prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
+
 
 Inspired by prettyjson, formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options.
 
