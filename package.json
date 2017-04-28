@@ -1,6 +1,6 @@
 {
   "name": "prettyjson-256",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "lib/prettyjson.js",
   "scripts": {
@@ -32,9 +32,9 @@
   "bin": {
     "prettyjson256": "./bin/prettyjson256"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "git+https://github.com/njhoffman/prettyjson-256.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njhoffman/prettyjson-256.git"
   },
   "author": "Nick Hoffman",
   "license": "ISC",
