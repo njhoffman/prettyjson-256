@@ -2,9 +2,9 @@
 import { stripAnsi } from '../lib/utils';
 
 describe('PrettyJSON', () => {
+  let sandbox, settingsInitStub, parseStub, prettyJson, renderStub;
 
   describe('render', () => {
-    let sandbox, settingsInitStub, parseStub, prettyJson;
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
       settingsInitStub = sandbox.stub();
@@ -52,73 +52,74 @@ describe('PrettyJSON', () => {
     });
   });
 
-  // describe('init', () => {
-  //   const prettyJson = proxyquire('../lib/prettyjson', {
-  //     './settings': { init: settingsInitStub }
-  //   });
-  //
-  //   beforeEach(() => {
-  //     settingsInitStub.resetHistory();
-  //   });
-  //
-  //   after(() => {
-  //     settingsInitStub.reset();
-  //   });
-  //
-  //   it('Should initialize settings module', () => {
-  //     prettyJson.init(null);
-  //     expect(settingsInitStub).to.be.called.once;
-  //   });
-  //
-  //   it('Should initialize settings with customOptions', () => {
-  //     prettyJson.init({ test_key: 'test_val' });
-  //     expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
-  //   });
-  // });
-  //
-  // describe('renderString', () => {
-  //   const prettyJson = proxyquire('../lib/prettyjson', {
-  //     './settings': { init: settingsInitStub },
-  //     './parser':  { default:  parseStub }
-  //   });
-  //   const renderStub = sinon.stub(prettyJson, 'render');
-  //
-  //   beforeEach(() => {
-  //     renderStub.resetHistory();
-  //   });
-  //
-  //   after(() => {
-  //     renderStub.reset();
-  //     parseStub.reset();
-  //     settingsInitStub.reset();
-  //   });
-  //
-  //   it('Should reinitialize settings if passed customOptions argument', () => {
-  //     prettyJson.renderString(null, { test_key: 'test_val' });
-  //     expect(settingsInitStub).to.be.called.once;
-  //     expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
-  //   });
-  //
-  //   it('Should return empty string if input is empty or not a string', () => {
-  //     let ret = prettyJson.renderString(null);
-  //     expect(ret).to.equal('');
-  //     ret = prettyJson.renderString('');
-  //     expect(ret).to.equal('');
-  //   });
-  //
-  //   it('Should render data if JSON is parsed correctly', () => {
-  //     prettyJson.renderString('{ "test_key": "test_val" }');
-  //     expect(renderStub).to.be.called.once;
-  //   });
-  //
-  //   it('Should remove non-JSON characters from the beginning of input string', () => {
-  //     prettyJson.renderString('JSDFK { "test_key": "test_val" }');
-  //     expect(renderStub).to.be.calledWith({ 'test_key': 'test_val' });
-  //   });
-  //
-  //   it('Should return error message if string does not contain valid JSON', () => {
-  //     const ret = prettyJson.renderString('!@#$');
-  //     expect(stripAnsi(ret) === 'Error: Not valid JSON!');
-  //   });
-  // });
+  describe('init', () => {
+
+    beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+      settingsInitStub = sandbox.stub();
+      prettyJson = proxyquire('../lib/prettyjson', {
+        './settings': { init: settingsInitStub }
+      });
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('Should initialize settings module', () => {
+      prettyJson.init(null);
+      expect(settingsInitStub).to.be.called.once;
+    });
+
+    it('Should initialize settings with customOptions', () => {
+      prettyJson.init({ test_key: 'test_val' });
+      expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
+    });
+  });
+
+  describe('renderString', () => {
+
+    beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+      settingsInitStub = sandbox.stub();
+      parseStub = sinon.stub();
+      prettyJson = proxyquire('../lib/prettyjson', {
+        './settings': { init: settingsInitStub },
+        './parser':  { default:  parseStub }
+      });
+      renderStub = sinon.stub(prettyJson, 'render');
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('Should reinitialize settings if passed customOptions argument', () => {
+      prettyJson.renderString(null, { test_key: 'test_val' });
+      expect(settingsInitStub).to.be.called.once;
+      expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
+    });
+
+    it('Should return empty string if input is empty or not a string', () => {
+      let ret = prettyJson.renderString(null);
+      expect(ret).to.equal('');
+      ret = prettyJson.renderString('');
+      expect(ret).to.equal('');
+    });
+
+    it('Should render data if JSON is parsed correctly', () => {
+      prettyJson.renderString('{ "test_key": "test_val" }');
+      expect(renderStub).to.be.called.once;
+    });
+
+    it('Should remove non-JSON characters from the beginning of input string', () => {
+      prettyJson.renderString('JSDFK { "test_key": "test_val" }');
+      expect(renderStub).to.be.calledWith({ 'test_key': 'test_val' });
+    });
+
+    // it('Should return error message if string does not contain valid JSON', () => {
+    //   const ret = prettyJson.renderString('!@#$');
+    //   expect(stripAnsi(ret) === 'Error: Not valid JSON!');
+    // });
+  });
 });
