@@ -159,6 +159,16 @@ var parse = exports.parse = function parse(data) {
 
   var output = [];
 
+  // reassign key value back to itself for customColor objects
+  if (_settings.options.customColors && (0, _lodash.isObjectLike)(data)) {
+    (0, _lodash.keys)(_settings.options.customColors).some(function (key) {
+      if (!(0, _lodash.isEmpty)(data[key])) {
+        data = _settings.pColor[key](data[key]);
+        return true;
+      }
+    });
+  }
+
   if (_utils2.default.isSerializable(data, _settings.options.inlineArrays)) {
     output = output.concat(_handleSerializable(data, indentation));
   } else if ((0, _lodash.isString)(data)) {

@@ -45,7 +45,7 @@ var _sortKeys = function _sortKeys(data, parentIsArray) {
 var init = exports.init = function init() {
   var customOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  (0, _settings.init)(customOptions);
+  return (0, _settings.init)(customOptions);
 };
 
 var render = exports.render = function render(data) {
@@ -56,6 +56,7 @@ var render = exports.render = function render(data) {
   if (_settings.options.alphabetizeKeys) {
     data = _sortKeys(data, (0, _lodash.isArray)(data));
   }
+
   return (0, _parser2.default)(data, startIndent);
 };
 

@@ -63,7 +63,13 @@ var init = exports.init = function init() {
   options.defaultIndentation = parseInt(options.defaultIndentation);
 
   var newColors = _lodash2.default.clone(options.colors);
+  if (options.customColors) {
+    _lodash2.default.each(_lodash2.default.keys(options.customColors), function (key) {
+      newColors[key] = options.customColors[key];
+    });
+  }
   exports.pColor = pColor = createColorObj(newColors);
+  return pColor;
 };
 
 var options = exports.options = _lodash2.default.cloneDeep(defaultOptions);
