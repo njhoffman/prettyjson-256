@@ -32,7 +32,7 @@ exports.isSerializable = function (input, inlineArrays) {
   }
 
   // empty objects and arrays rendered on the same line
-  if (((0, _lodash.isObjectLike)(input) || isArray(input)) && (0, _lodash.isEmpty)(input)) {
+  if ((0, _lodash.isObjectLike)(input) && (0, _lodash.isEmpty)(input)) {
     return true;
   }
 
