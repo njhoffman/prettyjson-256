@@ -1,6 +1,6 @@
 {
   "name": "prettyjson-256",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "lib/prettyjson.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha",
-    "test:mochista" : "mochista --sourceFilesExclude babel.js --reporter spec --opts ./test/mocha.opts",
+    "test:mochista": "mochista --sourceFilesExclude babel.js --reporter spec --opts ./test/mocha.opts",
     "test:watch": "mocha --watch --reporter spec",
     "integration": "nodemon test/integration.babel.js",
     "coverage": "better-npm-run coverage",
