@@ -26,7 +26,6 @@ export const testObj1 = {
   ],
   bool1: true,
   number1: 3925.25,
-  date1: new Date('1982-01-16'),
   function2: function testFunc2 () { },
   emptyArray1: [],
   emptyObject1: {},
