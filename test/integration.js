@@ -2,7 +2,7 @@ import { testObj1 } from './fixtures';
 import { render, init } from '../lib/prettyjson';
 // import { outputColorCodes } from '../lib/settings';
 
-const showOutput = false;
+const showOutput = true;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
