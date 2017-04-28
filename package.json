@@ -4,13 +4,13 @@
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "lib/prettyjson.js",
   "scripts": {
-    "lint": "esw lib tests",
+    "lint": "esw lib test",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha",
-    "test:mochista" : "mochista --sourceFilesExclude babel.js --reporter spec",
+    "test:mochista" : "mochista --sourceFilesExclude babel.js --reporter spec --opts ./test/mocha.opts",
     "test:watch": "mocha --watch --reporter spec",
-    "integration": "nodemon test/index.js",
+    "integration": "nodemon test/integration.babel.js",
     "coverage": "better-npm-run coverage",
     "coverage:watch": "npm run test:mochista -- --watch"
   },
