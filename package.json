@@ -32,6 +32,10 @@
   "bin": {
     "prettyjson256": "./bin/prettyjson256"
   },
+  "repository" : {
+    "type" : "git",
+    "url" : "git+https://github.com/njhoffman/prettyjson-256.git"
+  },
   "author": "Nick Hoffman",
   "license": "ISC",
   "dependencies": {
