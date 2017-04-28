@@ -1,0 +1,1 @@
+{"version":3,"sources":["../lib/index.babel.js"],"names":["require","module","exports"],"mappings":";;AAAAA,QAAQ,UAAR;AACAC,OAAOC,OAAP,GAAiBF,QAAQ,cAAR,CAAjB","file":"index.babel.js","sourcesContent":["require('../babel');\nmodule.exports = require('./prettyjson');\n"]}
