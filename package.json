@@ -1,6 +1,6 @@
 {
   "name": "prettyjson-256",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "lib/prettyjson.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "esw lib test",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
-    "start" : "node ./dist/index.js",
+    "start": "node ./dist/index.js",
     "test": "mocha",
     "test:mochista": "mochista --sourceFilesExclude babel.js --reporter spec --opts ./test/mocha.opts",
     "test:watch": "mocha --watch --reporter spec",
