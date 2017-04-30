@@ -43,6 +43,7 @@
   "license": "ISC",
   "dependencies": {
     "ansi-256-colors": "^1.1.0",
+    "babel-runtime": "^6.23.0",
     "fs": "0.0.1-security",
     "lodash": "^4.8.2",
     "minimist": "^1.2.0",
