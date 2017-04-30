@@ -69,6 +69,7 @@ var init = exports.init = function init() {
     });
   }
   exports.pColor = pColor = createColorObj(newColors);
+  return pColor;
 };
 
 var options = exports.options = _lodash2.default.cloneDeep(defaultOptions);

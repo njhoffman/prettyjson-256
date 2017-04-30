@@ -2,7 +2,7 @@
   "name": "prettyjson-256",
   "version": "1.1.5",
   "description": "JSON Pretty Print in 256 colors with extras",
-  "main": "dist/index.babel.js",
+  "main": "dist/prettyjson.js",
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "build": "babel -d ./dist ./lib -s",
