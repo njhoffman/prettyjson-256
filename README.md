@@ -1,6 +1,8 @@
 # prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
 
-Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors) and is best used in conjunction with a debug wrapper (such as another of my repos, debugger-256 which is the wrapper I use for my projects).
+Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors).  
+
+It's primary purpose is to decorate objects and strings to be sed in conjunction with a debug wrapper.  I my other repo debugger-256(https://github.com/njhoffman/debugger-256/) does just that, which I recommend you to check out.
 
 
 ![Output of object below](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
@@ -76,6 +78,7 @@ var pjson = require('prettyjson-256');
 
 console.log(prettyjson.render(data, startIndent, customOptions));
 ```
+The startIndent parameter specifies the minimum number of spaces to pad each line with.
 If no options are passed the default options will be used.
 
 ## Formatting Options
@@ -118,6 +121,25 @@ var options =  {
 ```
 
 The color properties follow the convention (and the functionality) used here: https://github.com/jbnicolai/ansi-256-colors. Values can be 'fg' for foreground or 'bg' for background as a key.  The value can 3 comma separated numbers ranging from 0-5 representing red, green and blue values respectively.  If a single number is given it will output grayscale  from range 0 (black) to 23 (white).
+
+## Using customColors setting to eaisly colorize strings inline
+Initializing with or passing a customColors property will let you reserve certain object keys as indicators to colorize the object value.
+
+For example:
+```javascript
+var pjson = require('prettyjson-256');
+var render = pjson.init({ 
+  customColors: {
+    red: { fg: [5,0,0] },
+    atomicTorquoise: { fg: [5,2,0], bg: [0,2,4] }
+  }
+});
+console.log("Using the customColors " + render({ red: "setting" }) + 
+  " makes it easy to " + render({  atomicTorquoise: "colors within " }) + " strings easily");
+```
+Will output:
+
+![Output of object below](https://raw.github.com/njhoffman/prettyjson-256/master/docs/customcolors1.jpg)
 
 ## Examples
 
