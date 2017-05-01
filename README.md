@@ -2,7 +2,7 @@
 
 Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output.
 
-It's primary purpose is to decorate objects and strings to be sed in conjunction with a debug wrapper.  I my other repo [debugger-256](https://github.com/njhoffman/debugger-256/) does just that, which I recommend you to check out.
+It's primary purpose is to decorate objects and strings to be used in conjunction with a debug wrapper (it does not output to a stream and just returns a string).  I recommend using my other repo [debugger-256](https://github.com/njhoffman/debugger-256/) for actual logging or as a starting point to build your own.
 
 
 ![Output of object below](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
@@ -47,7 +47,7 @@ If no options are passed the default options will be used.
 
 ## Formatting Options
 
-The options that can be passed as customOptions labeled above are as follows (including their defaults):
+The options that can be passed as the customOptions paramter are as follows (including their defaults):
 
 ```javascript
 var options =  {
@@ -84,7 +84,7 @@ var options =  {
 };
 ```
 
-The color properties follow the convention (and the functionality) used in the [ansi-256-colors package](https://github.com/jbnicolai/ansi-256-colors). Values can be 'fg' for foreground or 'bg' for background as a key.  The value can 3 comma separated numbers ranging from 0-5 representing red, green and blue values respectively.  If a single number is given it will output grayscale  from range 0 (black) to 23 (white).
+The color properties follow the convention (and the functionality) used in the [ansi-256-colors package](https://github.com/jbnicolai/ansi-256-colors). Values can be 'fg' for foreground or 'bg' for background as a key.  The value can be 3 comma separated numbers ranging from 0 to 5 representing red, green and blue values respectively.  If a single number is given it will output grayscale from a range of 0 (black) to 23 (white).
 
 ## Using customColors setting to eaisly colorize strings inline
 Initializing with or passing a customColors property will let you reserve certain object keys as indicators to colorize the object value.
