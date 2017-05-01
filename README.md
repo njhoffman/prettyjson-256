@@ -1,7 +1,65 @@
 # prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
 
-
 Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors) and is best used in conjunction with a debug wrapper (such as another of my repos, debugger-256 which is the wrapper I use for my projects).
+
+```javascript
+// this will be the object rendered in all the screenshots
+var testObj = {
+  object1: {
+    object1: 'object_value1',
+    array1: [
+      { object3: 'object_value_3' },
+      ['array_1', 'array_2', 'array_3', ['nested_array_1', 'nested_array_2']],
+      { function1: function testFunc1 () { } },
+      12353252,
+      { object1: {
+        embedded1: 'embedded1',
+        embedded2: false,
+        embedded3: [
+          'item3',
+          'item2',
+          'item1'
+        ]
+      } },
+      { object2: 'object_value_2' }
+    ],
+    object2: 'object_value2'
+  },
+  array1: [
+    'item2',
+    'item3',
+    'item1'
+  ],
+  bool1: true,
+  number1: 3925.25,
+  function2: function testFunc2 () { },
+  emptyArray1: [],
+  emptyObject1: {},
+  emptyString: '',
+  nestedObject1: {
+    nestedObject2: {
+      nestedObject3: {
+        nestedObject4: {
+          object2: {
+            object_key3: 'object_value1'
+          },
+          array2: [
+            'item1',
+            'item2'
+          ],
+          bool1: false,
+          number2: 52528352,
+          function2: function testFunc3 () { }
+        }
+      }
+    }
+  },
+  func4: function testFunc4 () { }
+};
+
+```
+
+![Output of above object](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
 
 ## Installation
 
