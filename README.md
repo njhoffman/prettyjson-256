@@ -1,7 +1,7 @@
 # prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
 
 
-Inspired by prettyjson, formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options.
+Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors) and is best used in conjunction with a debug wrapper (such as another of my repos, debugger-256 which is the wrapper I use for my projects).
 
 ## Installation
 
@@ -21,16 +21,8 @@ $ npm install --save-dev prettyjson-256
 
 ## Usage
 
-It's pretty easy to use it. You just have to include it in your script and call
-the `render()` method:
-
-Optionally intitialize with custom options:
-
-var pjson = require('prettyjson-256').init(customOptions);
-pjson.render(myObject, indent);
-
-pjson.render(myObject, indent, customOptions)
-
+ You just have to include it in your script and call
+the `render()` method, optionally intitializing with custom options:
 
 ```javascript
 var pjson = require('prettyjson-256');
