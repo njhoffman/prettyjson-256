@@ -121,18 +121,23 @@ The color properties follow the convention (and the functionality) used here: ht
 
 ## Examples
 
-![Setting maximum depth to 1](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth1.jpg)
+
 ```javascript
+// set maximum depth of object output to 1
 pjson.init({ depth: 1 })
 console.log(pjson.render(testObj));
 ```
+![Setting maximum depth to 1](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth1.jpg)
 
-![Setting maximum object depth to 4](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth4.jpg)
+
 ```javascript
+// set maximum depth to 4
 pjson.init({ depth: 4 })
 console.log(pjson.render(testObj));
 ```
-![Setting various color attributes](https://raw.github.com/njhoffman/prettyjson-256/master/docs/colors1.jpg)
+![Setting maximum object depth to 4](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth4.jpg)
+
+
 ```javascript
 pjson.init({
   colors: {
@@ -143,6 +148,7 @@ pjson.init({
 });
 console.log(pjson.render(testObj));
 ```
+![Setting various color attributes](https://raw.github.com/njhoffman/prettyjson-256/master/docs/colors1.jpg)
 
 ## Running Tests
 
