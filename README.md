@@ -1,48 +1,12 @@
 # prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
 
-Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors).  
+Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output.
 
-It's primary purpose is to decorate objects and strings to be sed in conjunction with a debug wrapper.  I my other repo debugger-256(https://github.com/njhoffman/debugger-256/) does just that, which I recommend you to check out.
+It's primary purpose is to decorate objects and strings to be sed in conjunction with a debug wrapper.  I my other repo [debugger-256](https://github.com/njhoffman/debugger-256/) does just that, which I recommend you to check out.
 
 
 ![Output of object below](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
 
-```javascript
-// this will be the object rendered in all the screenshots
-var testObj = {
-  object1: {
-    object1: 'object_value1',
-    array1: [
-      { object3: 'object_value_3' },
-      ['array_1', 'array_2', 'array_3', ['nested_array_1', 'nested_array_2']],
-      { function1: function testFunc1 () { } },
-      12353252,
-      { object1: {
-        embedded1: 'embedded1',
-        embedded2: false,
-        embedded3: [
-          'item3',
-          'item2',
-          'item1'
-        ]
-      } },
-      { object2: 'object_value_2' }
-    ],
-    object2: 'object_value2'
-  },
-  array1: [
-    'item2',
-    'item3',
-    'item1'
-  ],
-  bool1: true,
-  number1: 3925.25,
-  function2: function testFunc2 () { },
-  emptyArray1: [],
-  emptyObject1: {}
-};
-
-```
 ## Installation
 
 For command line access:
@@ -120,7 +84,7 @@ var options =  {
 };
 ```
 
-The color properties follow the convention (and the functionality) used here: https://github.com/jbnicolai/ansi-256-colors. Values can be 'fg' for foreground or 'bg' for background as a key.  The value can 3 comma separated numbers ranging from 0-5 representing red, green and blue values respectively.  If a single number is given it will output grayscale  from range 0 (black) to 23 (white).
+The color properties follow the convention (and the functionality) used in the [ansi-256-colors package](https://github.com/jbnicolai/ansi-256-colors). Values can be 'fg' for foreground or 'bg' for background as a key.  The value can 3 comma separated numbers ranging from 0-5 representing red, green and blue values respectively.  If a single number is given it will output grayscale  from range 0 (black) to 23 (white).
 
 ## Using customColors setting to eaisly colorize strings inline
 Initializing with or passing a customColors property will let you reserve certain object keys as indicators to colorize the object value.
@@ -143,6 +107,42 @@ Will output:
 
 ## Examples
 
+```javascript
+// this will be the object rendered in all the screenshots
+var testObj = {
+  object1: {
+    object1: 'object_value1',
+    array1: [
+      { object3: 'object_value_3' },
+      ['array_1', 'array_2', 'array_3', ['nested_array_1', 'nested_array_2']],
+      { function1: function testFunc1 () { } },
+      12353252,
+      { object1: {
+        embedded1: 'embedded1',
+        embedded2: false,
+        embedded3: [
+          'item3',
+          'item2',
+          'item1'
+        ]
+      } },
+      { object2: 'object_value_2' }
+    ],
+    object2: 'object_value2'
+  },
+  array1: [
+    'item2',
+    'item3',
+    'item1'
+  ],
+  bool1: true,
+  number1: 3925.25,
+  function2: function testFunc2 () { },
+  emptyArray1: [],
+  emptyObject1: {}
+};
+
+```
 
 ```javascript
 // set maximum depth of object output to 1
