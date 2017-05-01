@@ -117,9 +117,10 @@ var _handleObject = function _handleObject(data, indentation, level) {
       }
     } else if (level === _settings.options.depth) {
       // dont nest any more for object if depth level reached
-      key += _utils2.default.indent(maxIndexLength - i.length) + _settings.pColor.depth('[Object] (' + (0, _lodash.keys)(element).length + ' keys)');
+      key += _utils2.default.indent(maxIndexLength - i.length) + _settings.pColor.depth('[Object] (' + (0, _lodash.keys)(element).length + '  keys)');
       objOut.push(key);
     } else if (level + 1 === _settings.options.depth && (0, _lodash.isArray)(element)) {
+      key += _utils2.default.indent(maxIndexLength - i.length) + _settings.pColor.depth('[Array length ' + (0, _lodash.keys)(element).length + ']');
       objOut.push(key);
     } else {
       // If the index is an array or object, render it in next line

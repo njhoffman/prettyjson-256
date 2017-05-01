@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-var prettyjson = require('../lib/prettyjson');
+var prettyjson = require('../index.babel');
 var fs = require('fs');
 var argv = require('minimist')(process.argv.slice(2));
 
 var options = prettyjson._defaultOptions;
 
-var renderInputJson = function(input){
+var renderInputJson = (input) => {
   console.log(prettyjson.renderString(input, options));
 };
 
@@ -18,7 +18,7 @@ if (argv._.length) {
   } catch (e) {
     console.error('Error reading: ' + filename );
     console.error(e);
-	 console.error(e.stack);
+    console.error(e.stack);
     process.exit(1);
   }
 } else {
@@ -28,7 +28,7 @@ if (argv._.length) {
 
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
-  process.stdin.on('data', function (chunk) {
+  process.stdin.on('data', (chunk) => {
     if (chunk === '\n') {
       renderInputJson(streamData);
       streamData = '';

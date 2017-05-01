@@ -69,7 +69,7 @@ describe('Integration tests', () => {
     });
 
     it('Should render correctly when setting "depth" is modified', () => {
-      const expected = '15b4a7a5';
+      const expected = '15b67acb';
       init({ ...options, ...{ depth: 4 } });
       const ret = render(testObj1);
       showOutput && console.log(`\n${ret}\n`);
@@ -165,7 +165,7 @@ describe('Integration tests', () => {
     });
 
     it('Should render correct colors when setting "depth" is modified', () => {
-      const expected = '15b4e66f';
+      const expected = '15b6b99e';
       const cOpt = { depth: 4, colors: { depth: { fg: [5, 0, 0] } } };
       init({ ...options, ...cOpt });
       const ret = render(testObj1);
@@ -217,7 +217,7 @@ describe('Integration tests', () => {
       showOutput && console.log(`\n${ret}\n`);
       expect(checksum(ret)).to.equal(expected);
     });
-
+    //
     it('Should render correct colors when setting "string" is modified', () => {
       const expected = '1c621f5c';
       const cOpt = { colors: { string: { fg: [5, 0, 0] } } };

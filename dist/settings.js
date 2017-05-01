@@ -16,15 +16,23 @@ var _ansi256Colors2 = _interopRequireDefault(_ansi256Colors);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaultOptions = exports.defaultOptions = {
+  // sort object keys or array values alphabetically
   alphabetizeKeys: false,
+  // how many spaces to indent nested objects
   defaultIndentation: 2,
+  // maximum depth of nested levels to display for an object
   depth: -1,
+  // what to display if value is an empty array, object, or string
   emptyArrayMsg: '(empty array)',
   emptyObjectMsg: '{}',
-  emptyStringMsg: '(empty string)',
+  emptyStringMsg: '""',
+  // don't output any color
   noColor: false,
+  // show array indexes, this will prevent array from sorting if alphabetizeKeys is on
   numberArrays: false,
+  // show if contained in an object an array, string, or another object is empty
   showEmpty: true,
+  // color codes for different output elements based on: https://github.com/jbnicolai/ansi-256-colors
   colors: {
     boolFalse: { fg: [5, 4, 4] },
     boolTrue: { fg: [4, 4, 5] },
