@@ -1,4 +1,4 @@
-# prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/njhoffman/prettyjson-256/badge.png?branch=master)](https://coveralls.io/r/njhoffman/prettyjson-256?branch=master)
+# prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/github/njhoffman/prettyjson-256/badge.svg?branch=master)](https://coveralls.io/github/njhoffman/prettyjson-256?branch=master)
 
 Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output.
 
@@ -92,13 +92,13 @@ Initializing with or passing a customColors property will let you reserve certai
 For example:
 ```javascript
 var pjson = require('prettyjson-256');
-var render = pjson.init({ 
+var render = pjson.init({
   customColors: {
     red: { fg: [5,0,0] },
     atomicTorquoise: { fg: [5,2,0], bg: [0,2,4] }
   }
 });
-console.log("Using the customColors " + render({ red: "setting" }) + 
+console.log("Using the customColors " + render({ red: "setting" }) +
   " makes it easy to " + render({  atomicTorquoise: "colors within " }) + " strings easily");
 ```
 Will output:
