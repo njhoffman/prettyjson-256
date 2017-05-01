@@ -2,6 +2,9 @@
 
 Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output (using ansi-256-colors) and is best used in conjunction with a debug wrapper (such as another of my repos, debugger-256 which is the wrapper I use for my projects).
 
+
+![Output of object below](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
+
 ```javascript
 // this will be the object rendered in all the screenshots
 var testObj = {
@@ -34,33 +37,10 @@ var testObj = {
   number1: 3925.25,
   function2: function testFunc2 () { },
   emptyArray1: [],
-  emptyObject1: {},
-  emptyString: '',
-  nestedObject1: {
-    nestedObject2: {
-      nestedObject3: {
-        nestedObject4: {
-          object2: {
-            object_key3: 'object_value1'
-          },
-          array2: [
-            'item1',
-            'item2'
-          ],
-          bool1: false,
-          number2: 52528352,
-          function2: function testFunc3 () { }
-        }
-      }
-    }
-  },
-  func4: function testFunc4 () { }
+  emptyObject1: {}
 };
 
 ```
-
-![Output of above object](https://raw.github.com/njhoffman/prettyjson-256/master/docs/normal.jpg)
-
 ## Installation
 
 For command line access:
@@ -139,6 +119,30 @@ var options =  {
 
 The color properties follow the convention (and the functionality) used here: https://github.com/jbnicolai/ansi-256-colors. Values can be 'fg' for foreground or 'bg' for background as a key.  The value can 3 comma separated numbers ranging from 0-5 representing red, green and blue values respectively.  If a single number is given it will output grayscale  from range 0 (black) to 23 (white).
 
+## Examples
+
+![Setting maximum depth to 1](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth1.jpg)
+```javascript
+pjson.init({ depth: 1 })
+console.log(pjson.render(testObj));
+```
+
+![Setting maximum object depth to 4](https://raw.github.com/njhoffman/prettyjson-256/master/docs/depth4.jpg)
+```javascript
+pjson.init({ depth: 4 })
+console.log(pjson.render(testObj));
+```
+![Setting various color attributes](https://raw.github.com/njhoffman/prettyjson-256/master/docs/colors1.jpg)
+```javascript
+pjson.init({
+  colors: {
+    keys:        { fg: [3,0,1] },
+    functionTag: { fg: [3,5,1] },
+    boolFalse:   { bg: [5,0,0] }
+  }
+});
+console.log(pjson.render(testObj));
+```
 
 ## Running Tests
 
