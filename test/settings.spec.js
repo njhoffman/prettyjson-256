@@ -1,5 +1,3 @@
-const settings = require('../lib/settings');
-
 describe('Settings', () => {
   let sandbox, settings, getRgbStub;
   describe('outputColorCodes', () => {
@@ -9,7 +7,7 @@ describe('Settings', () => {
       settings = proxyquire('../lib/settings', {
         'ansi-256-colors' : {
           fg: {
-            getRgb: getRgbStub,
+            getRgb: getRgbStub
           },
           reset: ''
         }
@@ -31,11 +29,9 @@ describe('Settings', () => {
       expect(rows.length).to.equal(41); // 6 * 6 + 5 spaces
       expect(rows[0].trim().split('  ').length).to.equal(6);
     });
-
   });
 
   describe('Initialization', () => {
-
     settings = require('../lib/settings');
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
@@ -48,14 +44,14 @@ describe('Settings', () => {
     it('Should override defaultOptions with customOptions', () => {
       const customOptions = { depth: 2, new2: 'new_2' };
       settings.init(customOptions);
-      expect(settings.options).to.contain({ depth: 2 , new2: 'new_2' });
+      expect(settings.options).to.contain({ depth: 2, new2: 'new_2' });
     });
 
     it('Should recreate printColor function with new customColors', () => {
       const customOptions = {
         customColors: {
-          testColor1: { fg: [1,2,3] },
-          testColor2: { fg: [5,4,3] }
+          testColor1: { fg: [1, 2, 3] },
+          testColor2: { fg: [5, 4, 3] }
         }
       };
       const printColor = settings.init(customOptions);
@@ -66,6 +62,5 @@ describe('Settings', () => {
     });
 
     // TODO: implement error handling if customColors configured wrong
-
   });
 });
