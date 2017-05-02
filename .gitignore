@@ -5,6 +5,7 @@
 node_modules
 rethinkdb_data
 .happypack
+.coveralls.yml
 
 coverage
 
