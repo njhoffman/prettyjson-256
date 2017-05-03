@@ -141,8 +141,15 @@ var _handleEmpty = function _handleEmpty(data, indentation) {
   }
 };
 
+var _isCustomColor = function _isCustomColor(data) {
+  return _settings.options.customColors && (0, _lodash.isObjectLike)(data) && (0, _lodash.keys)(data).length === 1 && !(0, _lodash.isEmpty)(_settings.options.customColors[(0, _lodash.keys)(data)[0]]);
+};
+
 var _handleSerializable = function _handleSerializable(data, indentation) {
-  if ((0, _lodash.isFunction)(data)) {
+  if (_isCustomColor(data)) {
+    var colorKey = (0, _lodash.keys)(data)[0];
+    return _utils2.default.indent(indentation) + _settings.pColor[colorKey](data[colorKey]);
+  } else if ((0, _lodash.isFunction)(data)) {
     return _handleFunction(data, indentation);
   } else if ((0, _lodash.isDate)(data) || (0, _lodash.isNumber)(data)) {
     return _utils2.default.indent(indentation) + _addColorToData(data);
@@ -160,17 +167,8 @@ var parse = exports.parse = function parse(data) {
 
   var output = [];
 
-  // reassign key value back to itself for customColor objects
-  if (_settings.options.customColors && (0, _lodash.isObjectLike)(data)) {
-    (0, _lodash.keys)(_settings.options.customColors).some(function (key) {
-      if (!(0, _lodash.isEmpty)(data[key])) {
-        data = _settings.pColor[key](data[key]);
-        return true;
-      }
-    });
-  }
-
-  if (_utils2.default.isSerializable(data, _settings.options.inlineArrays)) {
+  // TODO: include single line objects (including customColor indexers) in serializable data handling
+  if (_utils2.default.isSerializable(data, _settings.options.inlineArrays) || _isCustomColor(data)) {
     output = output.concat(_handleSerializable(data, indentation));
   } else if ((0, _lodash.isString)(data)) {
     // unserializable string means it's multiline

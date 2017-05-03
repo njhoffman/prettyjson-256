@@ -1,5 +1,4 @@
 // TODO: Get rid of global pColor, restructure
-import { stripAnsi } from '../lib/utils';
 
 describe('PrettyJSON', () => {
   let sandbox, settingsInitStub, parseStub, prettyJson, renderStub;

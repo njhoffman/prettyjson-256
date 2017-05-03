@@ -1,4 +1,4 @@
-import { testObj1 } from './fixtures';
+import { testObj1, testMultiline1 } from './fixtures';
 import { render, init } from '../lib/prettyjson';
 // import { outputColorCodes } from '../lib/settings';
 
@@ -68,7 +68,39 @@ describe('Integration tests', () => {
       expect(checksum(ret)).to.equal(expected);
     });
 
-    it('Should render correctly when setting "depth" is modified', () => {
+    it('Should render correctly when setting "depth" is 0', () => {
+      const expected = '1aa630e3';
+      init({ ...options, ...{ depth: 0 } });
+      const ret = render(testObj1);
+      showOutput && console.log(`\n${ret}\n`);
+      expect(checksum(ret)).to.equal(expected);
+    });
+
+    it('Should render correctly when setting "depth" is 1', () => {
+      const expected = '131c278a';
+      init({ ...options, ...{ depth: 1 } });
+      const ret = render(testObj1);
+      showOutput && console.log(`\n${ret}\n`);
+      expect(checksum(ret)).to.equal(expected);
+    });
+
+    it('Should render correctly when setting "depth" is 2', () => {
+      const expected = '138aad6f';
+      init({ ...options, ...{ depth: 2 } });
+      const ret = render(testObj1);
+      showOutput && console.log(`\n${ret}\n`);
+      expect(checksum(ret)).to.equal(expected);
+    });
+
+    it('Should render correctly when setting "depth" is 3', () => {
+      const expected = '13d25fac';
+      init({ ...options, ...{ depth: 3 } });
+      const ret = render(testObj1);
+      showOutput && console.log(`\n${ret}\n`);
+      expect(checksum(ret)).to.equal(expected);
+    });
+
+    it('Should render correctly when setting "depth" is 4', () => {
       const expected = '15b67acb';
       init({ ...options, ...{ depth: 4 } });
       const ret = render(testObj1);
@@ -223,6 +255,16 @@ describe('Integration tests', () => {
       const cOpt = { colors: { string: { fg: [5, 0, 0] } } };
       init({ ...options, ...cOpt });
       const ret = render(testObj1);
+      showOutput && console.log(`\n${ret}\n`);
+      expect(checksum(ret)).to.equal(expected);
+    });
+  });
+
+  describe('Other', () => {
+    it('Should render multiline strings correctly', () => {
+      const expected = '12cb43be';
+      init(options);
+      const ret = render(testMultiline1);
       showOutput && console.log(`\n${ret}\n`);
       expect(checksum(ret)).to.equal(expected);
     });
