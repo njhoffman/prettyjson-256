@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const colors  = require('ansi-256-colors');
 
 const { testObj1, testMultiline1 } = require('../fixtures/fixtures');
 const { render, init } = require('../../lib/prettyjson');
 
 let showOutput = true;
-let currTestObj = testObj1;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
@@ -67,7 +67,8 @@ const _testOutput = (testObj, expected, customOptions = {}, showOutput = false, 
   const newOptions = Object.assign(Object.assign({}, options), customOptions);
   init(newOptions);
   const ret = render(testObj);
-  const failOut = snapshot ? `\n(expected)\n${snapshot}\n(returned)\n${ret}\n` : `\n(returned)\n${ret}\n`;
+  const failOut = snapshot ? `\n${colors.reset}(expected)\n${snapshot}\n(returned)\n${ret}\n`
+    : `\n${colors.reset}(returned)\n${ret}\n`;
   showOutput && console.log(`\n${ret}\n`);
   // expect(checksum(ret)).to.equal(expected);
   expect(checksum(ret), failOut).to.equal(expected);
@@ -76,7 +77,6 @@ const _testOutput = (testObj, expected, customOptions = {}, showOutput = false, 
 
 describe('Integration tests', () => {
   describe('General Settings', () => {
-    currTestObj = testObj1;
     const testOutput = _testOutput.bind(this, testObj1);
     it('Should render correctly with default options', () => {
       const expected = '1aaa86cf';
@@ -129,7 +129,7 @@ describe('Integration tests', () => {
     });
 
     it('Should render correctly when setting "noColor" is modified', () => {
-      const expected = '144c64fd';
+      const expected = '14a0dc5d';
       testOutput(expected, { noColor: true });
     });
 

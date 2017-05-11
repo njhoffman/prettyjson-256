@@ -31,8 +31,8 @@ describe('Utility methods', () => {
     });
 
     it('Should return true if input is an array and inlineArrays flag is set', () => {
-      expect(utils.isSerializable(['arr_1', 'arr_2'], true)).to.equal(true);
-      expect(utils.isSerializable(['arr_1', 'arr_2'], false)).to.equal(false);
+      expect(utils.isSerializable(['arr_1', 'arr_2'], { inlineArrays: true })).to.equal(true);
+      expect(utils.isSerializable(['arr_1', 'arr_2'], { inlineArrays: false })).to.equal(false);
     });
   });
 });
