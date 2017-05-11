@@ -120,6 +120,59 @@ describe('Parser', () => {
     });
 
   });
+  describe('Error Objects', () => {
+    let options = { errorDivider: '--error--' };
+    let errorMessageStub, errorDividerStub, errorNameStub, errorStackStub, errorObj;
+
+    beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+      errorMessageStub = sandbox.stub().returns('error message color');
+      errorDividerStub = sandbox.stub().returns('error divider color');
+      errorNameStub = sandbox.stub().returns('error name color');
+      errorStackStub = sandbox.stub().returns('error stack color');
+      try { throw new Error('test error message'); }
+      catch (err) { errorObj = err; }
+      parser = proxyquire('../lib/parser', {
+        './settings': {
+          getOptions: () => options,
+          getPrintColor: () => ({
+            errorDivider: errorDividerStub,
+            errorName: errorNameStub,
+            errorMessage: errorMessageStub,
+            errorStack: errorStackStub
+          })
+        }
+      });
+    })
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('Should format error name correctly', () => {
+      parser(errorObj);
+      expect(errorNameStub).to.be.called.once;
+      expect(errorNameStub).to.be.calledWith('Error');
+    });
+
+    it('Should format error message correctly', () => {
+      parser(errorObj);
+      expect(errorMessageStub).to.be.called.once;
+      expect(errorMessageStub).to.be.calledWith('test error message');
+    });
+
+    it('Should format error divider correctly', () => {
+      parser(errorObj);
+      expect(errorDividerStub).to.be.called.twice;
+      expect(errorDividerStub).to.be.calledWith('--error--');
+    });
+
+    it('Should format error stack correctly', () => {
+      parser(errorObj);
+      expect(errorStackStub).to.be.called.once;
+    });
+
+  });
   // describe('multiline strings', () => {
   // });
 });

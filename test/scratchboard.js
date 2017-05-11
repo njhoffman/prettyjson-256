@@ -1,4 +1,4 @@
-const { testObj1, testMultiline1 } = require('./fixtures');
+const { testObj1, testMultiline1 } = require('./fixtures/fixtures');
 const { render, init } = require('../lib/prettyjson');
 const { outputColorCodes } = require('../lib/settings');
 
@@ -32,3 +32,12 @@ console.log(outputColorCodes());
 init(options);
 console.log(render(testObj1));
 console.log(render(testMultiline1));
+
+
+try {
+  throw new Error('Hey doofus');
+} catch(err) {
+  console.log("im here");
+  // console.log(err);
+  console.log(render(err));
+};
