@@ -1,8 +1,8 @@
-import sinon from 'sinon';
-import chai from 'chai';
-import sinonChai from 'sinon-chai';
-import chaiAsPromised from 'chai-as-promised';
-import proxyquire from 'proxyquire';
+const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+const chaiAsPromised = require('chai-as-promised');
+const proxyquire = require('proxyquire');
 
 chai.config.includeStack = true;
 chai.use(sinonChai);
@@ -13,3 +13,4 @@ global.expect = chai.expect;
 global.assert = chai.assert;
 global.should = chai.should();
 global.proxyquire = proxyquire;
+

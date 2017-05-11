@@ -1,5 +1,5 @@
 describe('Utility methods', () => {
-  const utils = require('../lib/utils');
+  const utils = require('../../lib/utils');
   describe('indent', () => {
     it('Should return a string containing the number of spaces passed', () => {
       expect(utils.indent(0)).to.equal('');

@@ -10,7 +10,7 @@ describe('PrettyJSON', () => {
       parseStub = sinon.stub();
       prettyJson = proxyquire('../lib/prettyjson', {
         './settings': { init: settingsInitStub },
-        './parser': { default: parseStub }
+        './parser':  parseStub,
       });
     });
 
@@ -26,8 +26,8 @@ describe('PrettyJSON', () => {
 
     it('Should should sort keys correctly if option is set', () => {
       prettyJson = proxyquire('../lib/prettyjson', {
-        './settings': { init: settingsInitStub, options: { alphabetizeKeys: true } },
-        './parser':  { default:  parseStub }
+        './settings': { init: settingsInitStub },
+        './parser':  parseStub
       });
 
       const obj1 = { charlie: 'charlie_1', bravo: 'bravo_1', alpha: 'alpha_1' };
@@ -81,7 +81,7 @@ describe('PrettyJSON', () => {
       parseStub = sinon.stub();
       prettyJson = proxyquire('../lib/prettyjson', {
         './settings': { init: settingsInitStub },
-        './parser':  { default:  parseStub }
+        './parser':  parseStub
       });
       renderStub = sinon.stub(prettyJson, 'render');
     });

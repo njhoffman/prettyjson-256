@@ -1,0 +1,63 @@
+[38;5;122mobject1: [0m
+  [38;5;122mobject1: [0m[0mobject_value1
+  [38;5;122marray1: [0m
+    [38;5;122m-[0] [0m
+      [38;5;122mobject3: [0m[0mobject_value_3
+    [38;5;122m-[1] [0m
+      [38;5;122m-[0] [0m
+        [0marray_1
+      [38;5;122m-[1] [0m
+        [0marray_2
+      [38;5;122m-[2] [0m
+        [0marray_3
+      [38;5;122m-[3] [0m
+        [38;5;122m-[0] [0m
+          [0mnested_array_1
+        [38;5;122m-[1] [0m
+          [0mnested_array_2
+    [38;5;122m-[2] [0m
+      [38;5;122mfunction1: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc1()  }[0m
+    [38;5;122m-[3] [0m
+      [38;5;117m12353252[0m
+    [38;5;122m-[4] [0m
+      [38;5;122mobject1: [0m
+        [38;5;122membedded1: [0m[0membedded1
+        [38;5;122membedded2: [0m[38;5;224mfalse[0m
+        [38;5;122membedded3: [0m
+          [38;5;122m-[0] [0m
+            [0mitem3
+          [38;5;122m-[1] [0m
+            [0mitem2
+          [38;5;122m-[2] [0m
+            [0mitem1
+    [38;5;122m-[5] [0m
+      [38;5;122mobject2: [0m[0mobject_value_2
+  [38;5;122mobject2: [0m[0mobject_value2
+[38;5;122marray1: [0m
+  [38;5;122m-[0] [0m
+    [0mitem2
+  [38;5;122m-[1] [0m
+    [0mitem3
+  [38;5;122m-[2] [0m
+    [0mitem1
+[38;5;122mbool1: [0m        [38;5;189mtrue[0m
+[38;5;122mnumber1: [0m      [38;5;117m3925.25[0m
+[38;5;122mfunction2: [0m    [38;5;189m[Function] [0m[38;5;245mfunction testFunc2()  }[0m
+[38;5;122memptyArray1: [0m  [38;5;245m(empty array)[0m
+[38;5;122memptyObject1: [0m [38;5;245m{}[0m
+[38;5;122memptyString: [0m  [38;5;245m(empty string)[0m
+[38;5;122mnestedObject1: [0m
+  [38;5;122mnestedObject2: [0m
+    [38;5;122mnestedObject3: [0m
+      [38;5;122mnestedObject4: [0m
+        [38;5;122mobject2: [0m
+          [38;5;122mobject_key3: [0m[0mobject_value1
+        [38;5;122marray2: [0m
+          [38;5;122m-[0] [0m
+            [0mitem1
+          [38;5;122m-[1] [0m
+            [0mitem2
+        [38;5;122mbool1: [0m    [38;5;224mfalse[0m
+        [38;5;122mnumber2: [0m  [38;5;117m52528352[0m
+        [38;5;122mfunction2: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc3()  }[0m
+[38;5;122mfunc4: [0m        [38;5;189m[Function] [0m[38;5;245mfunction testFunc4() [0m

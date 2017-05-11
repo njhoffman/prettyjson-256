@@ -32,7 +32,7 @@ describe('Settings', () => {
   });
 
   describe('Initialization', () => {
-    settings = require('../lib/settings');
+    settings = require('../../lib/settings');
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
     });
@@ -44,7 +44,7 @@ describe('Settings', () => {
     it('Should override defaultOptions with customOptions', () => {
       const customOptions = { depth: 2, new2: 'new_2' };
       settings.init(customOptions);
-      expect(settings.options).to.contain({ depth: 2, new2: 'new_2' });
+      expect(settings.getOptions()).to.contain({ depth: 2, new2: 'new_2' });
     });
 
     it('Should recreate printColor function with new customColors', () => {

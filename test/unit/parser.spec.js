@@ -8,11 +8,11 @@ describe('Parser', () => {
       pColorStub = sandbox.stub().returns('colorized string');
       parser = proxyquire('../lib/parser', {
         './settings': {
-          options,
-          pColor: {
+          getOptions: () => options,
+          getPrintColor: () => ({
             testColor: pColorStub,
             keys: () => 'colorized keys'
-          }
+          })
         },
       });
     });
@@ -24,14 +24,14 @@ describe('Parser', () => {
 
     it('Should correctly identify object keys that match initialized customColrs', () => {
       const input = { testColor: 'This should be colorized' };
-      parser.parse(input);
+      parser(input);
       expect(pColorStub).to.be.called.once;
       expect(pColorStub).to.be.calledWith('This should be colorized');
     });
     //
     it('Should colorize the value of matched customColor keys of input object', () => {
       const input = { testColor: 'This should be colorized' };
-      const output = parser.parse(input);
+      const output = parser(input);
       expect(output).to.equal('colorized string');
     });
 
