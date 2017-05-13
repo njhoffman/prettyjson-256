@@ -1,10 +1,10 @@
 {
   "name": "prettyjson-256",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "dist/prettyjson.js",
   "scripts": {
-    "clean" : "rm -rf dist && mkdir dist",
+    "clean": "rm -rf dist && mkdir dist",
     "build": "babel -d ./dist ./lib -s",
     "lint": "esw lib test",
     "lint:fix": "npm run lint -- --fix",
