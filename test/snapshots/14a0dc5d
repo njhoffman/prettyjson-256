@@ -1,0 +1,43 @@
+object1: 
+  object1: [0mobject_value1
+  array1: 
+    - object3: [0mobject_value_3
+    - - [0marray_1
+      - [0marray_2
+      - [0marray_3
+      - - [0mnested_array_1
+        - [0mnested_array_2
+    - function1: [Function] function testFunc1()  }
+    - 12353252
+    - object1: 
+        embedded1: [0membedded1
+        embedded2: false
+        embedded3: 
+          - [0mitem3
+          - [0mitem2
+          - [0mitem1
+    - object2: [0mobject_value_2
+  object2: [0mobject_value2
+array1: 
+  - [0mitem2
+  - [0mitem3
+  - [0mitem1
+bool1:         true
+number1:       3925.25
+function2:     [Function] function testFunc2()  }
+emptyArray1:   (empty array)
+emptyObject1:  {}
+emptyString:   (empty string)
+nestedObject1: 
+  nestedObject2: 
+    nestedObject3: 
+      nestedObject4: 
+        object2: 
+          object_key3: [0mobject_value1
+        array2: 
+          - [0mitem1
+          - [0mitem2
+        bool1:     false
+        number2:   52528352
+        function2: [Function] function testFunc3()  }
+func4:         [Function] function testFunc4() 

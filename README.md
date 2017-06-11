@@ -1,4 +1,6 @@
 # prettyjson-256 [![Build Status](https://secure.travis-ci.org/njhoffman/prettyjson-256.png)](http://travis-ci.org/njhoffman/prettyjson-256) [![NPM version](https://badge.fury.io/js/prettyjson-256.png)](http://badge.fury.io/js/prettyjson-256) [![Coverage Status](https://coveralls.io/repos/github/njhoffman/prettyjson-256/badge.svg?branch=master)](https://coveralls.io/github/njhoffman/prettyjson-256?branch=master)
+[![Dependency Status](https://david-dm.org/njhoffman/prettyjson-256.svg)](https://david-dm.org/njhoffman/prettyjson-256)
+[![devDependeny Status](https://david-dm.org/njhoffman/prettyjson-256/dev-status.svg)](https://david-dm.org/njhoffman/prettyjson-256#info=devDependencies)
 
 Formats JSON data in a colored YAML-style format accomodating 256 colors and extended formatting options. This package formats objects similar to util.inspect or prettyjson in a human readable format. It supports a number of formatting options as well as 256 color output.
 

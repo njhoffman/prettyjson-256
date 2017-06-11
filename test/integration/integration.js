@@ -94,22 +94,22 @@ describe('Integration tests', () => {
     });
 
     it('Should render correctly when setting "depth" is 1', () => {
-      const expected = '131cad97';
+      const expected = '131afee3';
       testOutput(expected, { depth: 1 });
     });
 
     it('Should render correctly when setting "depth" is 2', () => {
-      const expected = '138b4a2d';
+      const expected = '138a0dd8';
       testOutput(expected, { depth: 2 });
     });
 
     it('Should render correctly when setting "depth" is 3', () => {
-      const expected = '13d30bdc';
+      const expected = '13d28ef5';
       testOutput(expected, { depth: 3 });
     });
 
     it('Should render correctly when setting "depth" is 4', () => {
-      const expected = '15b890aa';
+      const expected = '15b6bd04';
       testOutput(expected, { depth: 4 });
     });
 
@@ -147,19 +147,19 @@ describe('Integration tests', () => {
   describe('Color Settings', () => {
     const testOutput = _testOutput.bind(this, testObj1);
     it('Should render correct colors when setting "boolFalse" is modified', () => {
-      const expected = '1aa71b31';
+      const expected = '1c6154de';
       const cOpt = { colors: { boolFalse: { fg: [0, 5, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "boolTrue" is modified', () => {
-      const expected = '1aaa7e44';
+      const expected = '1c650835';
       const cOpt = { colors: { boolTrue: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "dash" is modified', () => {
-      const expected = '1aacb56a';
+      const expected = '1c678e3f';
       const cOpt = { colors: { dash: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
@@ -171,41 +171,41 @@ describe('Integration tests', () => {
     // });
 
     it('Should render correct colors when setting "depth" is modified', () => {
-      const expected = '15b8cf98';
+      const expected = '161ee82d';
       const cOpt = { depth: 4, colors: { depth: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "empty" is modified', () => {
-      const expected = '1aaad5a9';
+      const expected = '1c656b4a';
       const cOpt = { colors: { empty: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "functionHeader" is modified', () => {
-      const expected = '1aaaf509';
+      const expected = '1c658d75';
       const cOpt = { colors: { functionHeader: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "functionTag" is modified', () => {
-      const expected = '1aaa5b7f';
+      const expected = '1c64e192';
       const cOpt = { colors: { functionTag: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "keys" is modified', () => {
-      const expected = '1aafcbcb';
+      const expected = '1c6b0144';
       const cOpt = { colors: { keys: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
 
     it('Should render correct colors when setting "number" is modified', () => {
-      const expected = '1aaae6db';
+      const expected = '1c657ece';
       const cOpt = { colors: { number: { fg: [5, 0, 0] } } };
       testOutput(expected, cOpt);
     });
-    //
+
     it('Should render correct colors when setting "string" is modified', () => {
       const expected = '1c66d5ff';
       const cOpt = { colors: { string: { fg: [5, 0, 0] } } };

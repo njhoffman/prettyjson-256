@@ -5,7 +5,8 @@ var _require = require('lodash'),
     isObjectLike = _require.isObjectLike,
     each = _require.each,
     isEmpty = _require.isEmpty,
-    keys = _require.keys;
+    keys = _require.keys,
+    flattenDeep = _require.flattenDeep;
 
 var _require2 = require('./settings'),
     getOptions = _require2.getOptions,
@@ -56,8 +57,18 @@ var render = function render(data) {
   if (getOptions().alphabetizeKeys) {
     data = _sortKeys(data, isArray(data));
   }
-
-  return parse(data, startIndent);
+  var ret = parse(data, startIndent);
+  if (getOptions().browser) {
+    ret = flattenDeep(ret);
+    var messages = ret.filter(function (el, i) {
+      return i % 2 === 0;
+    });
+    var colorCodes = ret.filter(function (el, i) {
+      return i % 2 !== 0;
+    });
+    return [messages, colorCodes];
+  }
+  return ret;
 };
 
 var renderString = function renderString(data, customOptions) {

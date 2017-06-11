@@ -62,8 +62,9 @@ var _handleMultiLine = function _handleMultiLine(data, indentation) {
 };
 
 var _handleFunction = function _handleFunction(data, indentation) {
-  var funcHeader = data.toString().split('\n')[0].replace('{', '');
-  return [Utils.indent(indentation) + pColor.functionTag('[Function] ') + pColor.functionHeader(funcHeader)];
+  var funcTag = pColor.functionTag('[Function] ');
+  var funcHeader = pColor.functionHeader(data.toString().split('\n')[0].replace('{', ''));
+  return options.browser ? [Utils.indent(indentation, funcTag), funcHeader] : Utils.indent(indentation, funcTag) + funcHeader;
 };
 
 var _handleError = function _handleError(data, indentation) {
@@ -74,19 +75,24 @@ var _handleError = function _handleError(data, indentation) {
 var _handleArray = function _handleArray(data, indentation, level) {
   var arrayOut = [];
   if (level + 1 === options.depth) {
-    var line = Utils.indent(indentation) + pColor.depth('[Array length ' + data.length + ']');
+    var line = Utils.indent(indentation, pColor.depth('[Array length ' + data.length + ']'));
     arrayOut.push(line);
   } else {
     level++;
     each(data, function (element, i) {
       var line = options.numberArrays ? '-[' + i + '] ' : '- ';
-      line = Utils.indent(indentation) + pColor.dash(line);
+      line = Utils.indent(indentation, pColor.dash(line));
       // if arrays are numbered, each element should be on its own line
       if (options.numberArrays) {
         arrayOut.push(line);
         line = Utils.indent(indentation + options.defaultIndentation);
       }
-      line += parse(element, indentation + options.defaultIndentation, level).trim();
+      var parsedEl = parse(element, indentation + options.defaultIndentation, level);
+      if (isArray(parsedEl)) {
+        line = parsedEl;
+      } else {
+        line += parsedEl.trim();
+      }
       arrayOut.push(line);
     });
   }
@@ -96,33 +102,50 @@ var _handleArray = function _handleArray(data, indentation, level) {
 var _handleObject = function _handleObject(data, indentation, level) {
   // Get the size of the longest index to align all the values
   var maxIndexLength = Utils.getMaxIndexLength(data);
-  var key;
-
   var objOut = [];
+  var key = void 0;
   level++;
+
   each(keys(data), function (i) {
     var element = data[i];
-    key = i + ': ';
-    key = Utils.indent(indentation) + pColor.keys(key);
+    key = Utils.indent(indentation, pColor.keys(i + ': '));
 
     // If the value is serializable, render it on the same line
     if (Utils.isSerializable(element, options)) {
       // but don't render anything if showEmpty setting is false and data is empty array, object, or string
       if (!((isObjectLike(element) || isString(element)) && isEmpty(element) && !options.showEmpty)) {
-        key += parse(element, maxIndexLength - i.length);
-        objOut.push(key);
+        var inlineData = parse(element, maxIndexLength - i.length);
+        if (options.browser) {
+          // add %i identifier to indicate inline data should be printed on same line
+          // TODO: hacky, fix or at least handle more than one nested color obj depth
+          if (isArray(inlineData[0])) {
+            inlineData[0][0] += '%i';
+            inlineData[1][0] += '%i';
+          } else {
+            inlineData[0] += '%i';
+          }
+          objOut.push([key, inlineData]);
+        } else {
+          objOut.push(key + inlineData);
+        }
       }
     } else if (level === options.depth) {
       // dont nest any more for object if depth level reached
-      key += Utils.indent(maxIndexLength - i.length) + pColor.depth('[Object] (' + keys(element).length + '  keys)');
+      key += Utils.indent(maxIndexLength - i.length, pColor.depth('[Object] (' + keys(element).length + ' keys)'));
       objOut.push(key);
     } else if (level + 1 === options.depth && isArray(element)) {
-      key += Utils.indent(maxIndexLength - i.length) + pColor.depth('[Array length ' + keys(element).length + ']');
+      key += Utils.indent(maxIndexLength - i.length, pColor.depth('[Array length ' + keys(element).length + ']'));
       objOut.push(key);
     } else {
       // If the index is an array or object, render it in next line
-      objOut.push(key);
-      objOut.push(parse(element, indentation + options.defaultIndentation, level));
+      if (options.browser) {
+        // key[0] = '\n' + key[0];
+        // key[0] = key[0] + '\n';
+        objOut.push(key, parse(element, indentation + options.defaultIndentation, level));
+      } else {
+        objOut.push(key);
+        objOut.push(parse(element, indentation + options.defaultIndentation, level));
+      }
     }
   });
   return objOut;
@@ -130,27 +153,26 @@ var _handleObject = function _handleObject(data, indentation, level) {
 
 var _handleEmpty = function _handleEmpty(data, indentation) {
   if (isArray(data)) {
-    return Utils.indent(indentation) + pColor.empty(options.emptyArrayMsg);
+    return Utils.indent(indentation, pColor.empty(options.emptyArrayMsg));
   } else if (isString(data)) {
-    return Utils.indent(indentation) + pColor.empty(options.emptyStringMsg);
+    return Utils.indent(indentation, pColor.empty(options.emptyStringMsg));
   } else if (isObjectLike(data)) {
-    return Utils.indent(indentation) + pColor.empty(options.emptyObjectMsg);
+    return Utils.indent(indentation, pColor.empty(options.emptyObjectMsg));
   }
 };
 
 var _handleSerializable = function _handleSerializable(data, indentation) {
   if (Utils.isCustomColor(data, options.customColors)) {
     var colorKey = keys(data)[0];
-    return Utils.indent(indentation) + pColor[colorKey](data[colorKey]);
+    return Utils.indent(indentation, pColor[colorKey](data[colorKey]));
   } else if (isFunction(data)) {
     return _handleFunction(data, indentation);
   } else if (isDate(data) || isNumber(data)) {
-    return Utils.indent(indentation) + _addColorToData(data);
+    return Utils.indent(indentation, _addColorToData(data));
   } else if ((isObjectLike(data) || isString(data)) && isEmpty(data)) {
     return _handleEmpty(data, indentation);
   } else {
-    // Render a string exactly equal
-    return Utils.indent(indentation) + _addColorToData(data);
+    return Utils.indent(indentation, _addColorToData(data));
   }
 };
 
@@ -175,8 +197,8 @@ var parse = function parse(data) {
     output = output.concat(_handleObject(data, indentation, level));
   }
 
-  // Return all the lines as a string
-  return output.join('\n');
+  // Return all the lines as a string if going to terminal, otherwise return array for browser output
+  return options.browser ? output : output.join('\n');
 };
 
 module.exports = parse;
