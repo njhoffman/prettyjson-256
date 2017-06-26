@@ -22,6 +22,9 @@ var _require = require('lodash'),
 var indent = function indent(numSpaces) {
   var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
+  if (!isNumber(numSpaces) || numSpaces <= 0) {
+    return data;
+  }
   var spaces = new Array(numSpaces + 1).join(' ');
   if (isArray(data)) {
     data[0] = spaces + data[0];
