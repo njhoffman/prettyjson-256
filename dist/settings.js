@@ -37,17 +37,17 @@ var defaultOptions = {
     boolTrue: { fg: [4, 4, 5] },
     dash: { fg: [2, 5, 4] },
     date: { fg: [0, 5, 2] },
-    depth: { fg: [9] },
-    empty: { fg: [13] },
-    functionHeader: { fg: [13] },
+    depth: { fg: 9 },
+    empty: { fg: 13 },
+    functionHeader: { fg: 13 },
     functionTag: { fg: [4, 4, 5] },
     keys: { fg: [2, 5, 4] },
     number: { fg: [2, 4, 5] },
-    string: { fg: [20] },
-    errorDivider: { fg: [18] },
+    string: { fg: 20 },
+    errorDivider: { fg: 8 },
     errorName: { fg: [5, 0, 0] },
     errorMessage: { fg: [5, 5, 5] },
-    errorStack: { fg: [15] }
+    errorStack: { fg: 15 }
   }
 };
 
@@ -86,8 +86,8 @@ var createColorTerminal = function createColorTerminal(colorMap) {
       if (options.noColor) {
         return sInput;
       }
-      var cItem = colorMap[key].fg ? colorMap[key].fg.length === 1 ? ansiColors.fg.grayscale[colorMap[key].fg[0]] : colorMap[key].fg.length === 3 ? ansiColors.fg.getRgb.apply(this, colorMap[key].fg) : '' : '';
-      cItem += (colorMap[key].bg ? colorMap[key].bg.length === 1 ? ansiColors.bg.grayscale[colorMap[key].bg[0]] : colorMap[key].bg.length === 3 ? ansiColors.bg.getRgb.apply(this, colorMap[key].bg) : '' : '') + sInput + ansiColors.reset;
+      var cItem = colorMap[key].fg ? isNumber(colorMap[key].fg) ? ansiColors.fg.grayscale[colorMap[key].fg[0]] : colorMap[key].fg.length === 3 ? ansiColors.fg.getRgb.apply(this, colorMap[key].fg) : '' : '';
+      cItem += (colorMap[key].bg ? isNumber(colorMap[key].bg) ? ansiColors.bg.grayscale[colorMap[key].bg[0]] : colorMap[key].bg.length === 3 ? ansiColors.bg.getRgb.apply(this, colorMap[key].bg) : '' : '') + sInput + ansiColors.reset;
       return cItem;
     }.bind(undefined, key);
   });

@@ -91,7 +91,8 @@ var renderString = function renderString(data, customOptions) {
   try {
     parsedData = JSON.parse(data);
   } catch (e) {
-    return pColor.error('Error:') + ' Not valid JSON!';
+    // just send back as is
+    parsedData = data;
   }
 
   output += exports.render(parsedData);
