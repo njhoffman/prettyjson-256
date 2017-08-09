@@ -87,8 +87,8 @@ var createColorTerminal = function createColorTerminal(colorMap) {
       if (options.noColor) {
         return sInput;
       }
-      var cItem = colorMap[key].fg ? isNumber(colorMap[key].fg) ? ansiColors.fg.grayscale[colorMap[key].fg[0]] : colorMap[key].fg.length === 3 ? ansiColors.fg.getRgb.apply(this, colorMap[key].fg) : '' : '';
-      cItem += (colorMap[key].bg ? isNumber(colorMap[key].bg) ? ansiColors.bg.grayscale[colorMap[key].bg[0]] : colorMap[key].bg.length === 3 ? ansiColors.bg.getRgb.apply(this, colorMap[key].bg) : '' : '') + sInput + ansiColors.reset;
+      var cItem = colorMap[key].fg ? isNumber(colorMap[key].fg) ? ansiColors.fg.grayscale[colorMap[key].fg] : colorMap[key].fg.length === 3 ? ansiColors.fg.getRgb.apply(this, colorMap[key].fg) : '' : '';
+      cItem += (colorMap[key].bg ? isNumber(colorMap[key].bg) ? ansiColors.bg.grayscale[colorMap[key].bg] : colorMap[key].bg.length === 3 ? ansiColors.bg.getRgb.apply(this, colorMap[key].bg) : '' : '') + sInput + ansiColors.reset;
       return cItem;
     }.bind(undefined, key);
   });
