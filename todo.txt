@@ -1,0 +1,2 @@
+aws elb describe-load-balancers --output json | grep -i 'instance' | prettyjson256
+  pColor.error is not a function  (prettyjson.js 79)

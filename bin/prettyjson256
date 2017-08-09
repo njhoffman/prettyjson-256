@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-var prettyjson = require('../index.babel');
-var fs = require('fs');
-var argv = require('minimist')(process.argv.slice(2));
+const prettyjson = require('../index.babel');
+const fs = require('fs');
+const argv = require('minimist')(process.argv.slice(2));
 
-var options = prettyjson._defaultOptions;
+let options = prettyjson._defaultOptions;
 
-var renderInputJson = (input) => {
+let renderInputJson = (input) => {
   console.log(prettyjson.renderString(input, options));
 };
 
@@ -31,6 +31,11 @@ if (argv._.length) {
   process.stdin.on('data', (chunk) => {
     if (chunk === '\n') {
       renderInputJson(streamData);
+      streamData = '';
+      return;
+    } else if (/\n$/.test(chunk)) {
+      streamData += chunk;
+      streamData.split('\n').forEach(renderInputJson);
       streamData = '';
       return;
     }
