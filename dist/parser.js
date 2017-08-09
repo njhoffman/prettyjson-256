@@ -193,7 +193,7 @@ var parse = function parse(data) {
     output = output.concat(_handleArray(data, indentation, level));
   } else if (isError(data)) {
     output = output.concat(_handleError(data, indentation, level));
-  } else if (isObjectLike(data)) {
+  } else if (isObjectLike(data) && options.depth > 0) {
     output = output.concat(_handleObject(data, indentation, level));
   }
 
