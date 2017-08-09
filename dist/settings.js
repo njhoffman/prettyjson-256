@@ -6,6 +6,7 @@ var _require = require('lodash'),
     cloneDeep = _require.cloneDeep,
     defaultsDeep = _require.defaultsDeep,
     keys = _require.keys,
+    isNumber = _require.isNumber,
     times = _require.times;
 
 var ansiColors = require('ansi-256-colors');
