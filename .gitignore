@@ -1,12 +1,12 @@
 .DS_STORE
 *.log
-.coverage-cache
+.coverage-cache/
+coverage/
 
 node_modules
 rethinkdb_data
 .happypack
 .coveralls.yml
 
-coverage
 
 .idea/
