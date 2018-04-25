@@ -11,6 +11,7 @@ var _require = require('lodash'),
 var _require2 = require('./settings'),
     getOptions = _require2.getOptions,
     getPrintColor = _require2.getPrintColor,
+    outputColorCodes = _require2.outputColorCodes,
     settingsInit = _require2.init;
 
 var parse = require('./parser');
@@ -58,6 +59,7 @@ var render = function render(data) {
     data = _sortKeys(data, isArray(data));
   }
   var ret = parse(data, startIndent);
+  // console.info('parse return', ret);
   if (getOptions().browser) {
     ret = flattenDeep(ret);
     var messages = ret.filter(function (el, i) {
@@ -100,6 +102,8 @@ var renderString = function renderString(data, customOptions) {
 };
 
 exports = module.exports = {
+  getOptions: getOptions,
+  outputColorCodes: outputColorCodes,
   renderString: renderString,
   render: render,
   init: init

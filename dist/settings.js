@@ -38,17 +38,39 @@ var defaultOptions = {
     boolTrue: { fg: [4, 4, 5] },
     dash: { fg: [2, 5, 4] },
     date: { fg: [0, 5, 2] },
-    depth: { fg: 9 },
-    empty: { fg: 13 },
-    functionHeader: { fg: 13 },
+    depth: { fg: [9] },
+    empty: { fg: [13] },
+    functionHeader: { fg: [13] },
     functionTag: { fg: [4, 4, 5] },
     keys: { fg: [2, 5, 4] },
     number: { fg: [2, 4, 5] },
-    string: { fg: 20 },
-    errorDivider: { fg: 8 },
+    string: { fg: [20] },
+    errorDivider: { fg: [8] },
     errorName: { fg: [5, 0, 0] },
     errorMessage: { fg: [5, 5, 5] },
-    errorStack: { fg: 15 }
+    errorStack: { fg: [15] }
+  },
+  customColors: {
+    bold: { fg: [23] },
+    blue: { fg: [0, 0, 4] },
+    lightBlue: { fg: [0, 1, 5] },
+    darkBlue: { fg: [0, 0, 3] },
+    red: { fg: [3, 0, 0] },
+    lightRed: { fg: [5, 0, 0] },
+    darkRed: { fg: [1, 0, 0] },
+    green: { fg: [0, 3, 0] },
+    lightGreen: { fg: [0, 5, 0] },
+    darkGreen: { fg: [0, 1, 0] },
+    purple: { fg: [1, 0, 3] },
+    lightPurple: { fg: [2, 0, 5] },
+    darkPurple: { fg: [1, 0, 1] },
+    cyan: { fg: [2, 3, 4] },
+    lightCyan: { fg: [2, 5, 5] },
+    darkCyan: { fg: [1, 2, 3] },
+    yellow: { fg: [4, 5, 0] },
+    orange: { fg: [5, 2, 0] },
+    white: { fg: [0, 3, 0] },
+    gray: { fg: [12] }
   }
 };
 
@@ -56,21 +78,25 @@ var createColorBrowser = function createColorBrowser(colorMap) {
   var printColor = {};
   each(colorMap, function (val, key) {
     printColor[key] = function (key, sInput) {
+      // console.info('print 1: ' + key + ' - ' +  sInput);
       if (options.noColor || !colorMap[key]) {
         return [sInput];
       }
       var cItem = ['%c ' + sInput];
       var colorCode = void 0;
-      if (colorMap[key].fg) {
-        colorCode = colorMap[key].fg.length === 1 ? (11 * parseInt(colorMap[key].fg)).toString(16) + (11 * parseInt(colorMap[key].fg)).toString(16) + (11 * parseInt(colorMap[key].fg)).toString(16) : (51 * parseInt(colorMap[key].fg[0])).toString(16) + (51 * parseInt(colorMap[key].fg[1])).toString(16) + (51 * parseInt(colorMap[key].fg[2])).toString(16);
+      var fg = _.has(colorMap, key + '.fg') ? colorMap[key].fg : false;
+      var bg = _.has(colorMap, key + '.bg') ? colorMap[key].bg : false;
 
+      if (fg) {
+        colorCode = fg.length === 1 ? (11 * parseInt(fg)).toString(16) + (11 * parseInt(fg)).toString(16) + (11 * parseInt(fg)).toString(16) : (51 * parseInt(fg[0])).toString(16) + (51 * parseInt(fg[1])).toString(16) + (51 * parseInt(fg[2])).toString(16);
         cItem.push('color: #' + colorCode);
       }
-      if (colorMap[key].bg) {
-        colorCode = colorMap[key].bg.length === 1 ? times(3, 11.09 * parseInt(colorMap[key].bg)).toString(16) : (51 * parseInt(colorMap[key].bg[0])).toString(16) + (51 * parseInt(colorMap[key].bg[1])).toString(16) + (51 * parseInt(colorMap[key].bg[2])).toString(16);
 
+      if (bg) {
+        colorCode = bg.length === 1 ? times(3, 11.09 * parseInt(bg)).toString(16) : (51 * parseInt(bg[0])).toString(16) + (51 * parseInt(bg[1])).toString(16) + (51 * parseInt(bg[2])).toString(16);
         cItem.push('background-color: #' + colorCode);
       }
+      // console.info('print 2', cItem);
       return cItem;
     }.bind(undefined, key);
   });
