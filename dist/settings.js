@@ -69,7 +69,7 @@ var defaultOptions = {
     darkCyan: { fg: [1, 2, 3] },
     yellow: { fg: [4, 5, 0] },
     orange: { fg: [5, 2, 0] },
-    white: { fg: [0, 3, 0] },
+    white: { fg: [4, 4, 4] },
     gray: { fg: [12] }
   }
 };
