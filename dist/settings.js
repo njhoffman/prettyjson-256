@@ -10,6 +10,7 @@ var _require = require('lodash'),
     times = _require.times;
 
 var ansiColors = require('ansi-256-colors');
+var customColors = require('./colors');
 
 var defaultOptions = {
   // sort object keys or array values alphabetically
@@ -50,29 +51,29 @@ var defaultOptions = {
     errorMessage: { fg: [5, 5, 5] },
     errorStack: { fg: [15] }
   },
-  customColors: {
-    bold: { fg: [23] },
-    blue: { fg: [0, 0, 4] },
-    lightBlue: { fg: [0, 1, 5] },
-    darkBlue: { fg: [0, 0, 3] },
-    red: { fg: [3, 0, 0] },
-    lightRed: { fg: [5, 0, 0] },
-    darkRed: { fg: [1, 0, 0] },
-    green: { fg: [0, 3, 0] },
-    lightGreen: { fg: [0, 5, 0] },
-    darkGreen: { fg: [0, 1, 0] },
-    purple: { fg: [1, 0, 3] },
-    lightPurple: { fg: [2, 0, 5] },
-    darkPurple: { fg: [1, 0, 1] },
-    cyan: { fg: [2, 3, 4] },
-    lightCyan: { fg: [2, 5, 5] },
-    darkCyan: { fg: [1, 2, 3] },
-    yellow: { fg: [4, 5, 0] },
-    orange: { fg: [5, 2, 0] },
-    white: { fg: [4, 4, 4] },
-    gray: { fg: [12] }
-  }
+  customColors: customColors
 };
+// customColors: {
+//   bold:          { fg: [23] },
+//   blue:          { fg: [0, 0, 3] },
+//   lightBlue:     { fg: [0, 0, 5] },
+//   darkBlue:      { fg: [0, 0, 3] },
+//   red:           { fg: [3, 0, 0] },
+//   lightRed:      { fg: [5, 0, 0] },
+//   darkRed:       { fg: [1, 0, 0] },
+//   green:         { fg: [0, 3, 0] },
+//   lightGreen:    { fg: [0, 5, 0] },
+//   darkGreen:     { fg: [0, 1, 0] },
+//   purple:        { fg: [1, 0, 3] },
+//   lightPurple:   { fg: [2, 0, 5] },
+//   darkPurple:    { fg: [1, 0, 1] },
+//   cyan:          { fg: [2, 3, 4] },
+//   lightCyan:     { fg: [2, 5, 5] },
+//   darkCyan:      { fg: [1, 2, 3] },
+//   yellow:        { fg: [4, 5, 0] },
+//   orange:        { fg: [5, 2, 0] },
+//   white:         { fg: [4, 4, 4] },
+//   gray:          { fg: [12] },
 
 var createColorBrowser = function createColorBrowser(colorMap) {
   var printColor = {};
