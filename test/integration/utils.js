@@ -1,13 +1,16 @@
+const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const colors = require('ansi-256-colors');
 
 const { render, init } = require('../../lib/prettyjson');
 
-const showOutput = true;
+const showOutput = false;
+const saveSnapshot = false;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
+// TODO: make fg array optional
 const options = {
   alphabetizeKeys: false,
   defaultIndentation: 2,
@@ -23,13 +26,12 @@ const options = {
     boolTrue: { fg: [4, 4, 5] },
     dash: { fg: [2, 5, 4] },
     date: { fg: [0, 5, 2] },
-    depth: { fg: 9 },
-    empty: { fg: 13 },
-    functionHeader: { fg: 13 },
+    depth: { fg: [9] },
+    empty: { fg: [12] },
+    functionHeader: { fg: [13] },
     functionTag: { fg: [4, 4, 5] },
     keys: { fg: [2, 5, 4] },
-    number: { fg: [2, 4, 5] },
-    string: null
+    number: { fg: [2, 4, 5] }
   }
 };
 
@@ -61,9 +63,9 @@ const checksum = s => {
   return (chk & 0xffffffff).toString(16);
 };
 
-const _testOutput = (testObj, expected, customOptions = {}, showOutput = false, saveSnapshot = false) => {
+const _testOutput = (testObj, expected, customOptions = {}) => {
   const snapshot = loadSnapshot(expected);
-  const newOptions = { ...options, ...customOptions };
+  const newOptions = _.defaultsDeep(customOptions, options);
   init(newOptions);
   const ret = render(testObj);
   const failOut = snapshot
@@ -73,9 +75,13 @@ const _testOutput = (testObj, expected, customOptions = {}, showOutput = false, 
   if (showOutput) {
     console.log(`\n${ret}\n`);
   }
+
+  if (saveSnapshot) {
+    console.log('writing snapshot');
+    writeSnapshot(expected, ret);
+  }
   // expect(checksum(ret)).to.equal(expected);
   expect(checksum(ret), failOut).to.equal(expected);
-  saveSnapshot && writeSnapshot(expected, ret);
 };
 
 module.exports = {
