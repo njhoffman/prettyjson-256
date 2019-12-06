@@ -10,7 +10,7 @@ module.exports = () => {
 
     describe('render', () => {
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         settingsInitStub = sandbox.stub();
         parseStub = sinon.stub();
         prettyJson = proxyquire('../lib/prettyjson', {
@@ -56,7 +56,7 @@ module.exports = () => {
 
     describe('init', () => {
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         settingsInitStub = sandbox.stub();
         prettyJson = proxyquire('../lib/prettyjson', {
           './settings': { init: settingsInitStub }
@@ -80,7 +80,7 @@ module.exports = () => {
 
     describe('renderString', () => {
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         settingsInitStub = sandbox.stub();
         parseStub = sinon.stub();
         prettyJson = proxyquire('../lib/prettyjson', {

@@ -5,7 +5,7 @@ module.exports = () => {
     let getRgbStub;
     describe('outputColorCodes', () => {
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         getRgbStub = sandbox.stub();
         settings = proxyquire('../lib/settings', {
           'ansi-256-colors': {
@@ -37,7 +37,7 @@ module.exports = () => {
     describe('Initialization', () => {
       settings = require('../../lib/settings');
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
       });
 
       afterEach(() => {

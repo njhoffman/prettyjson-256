@@ -85,9 +85,7 @@
     "mochista": "^0.11.0",
     "prettier": "^1.19.1",
     "proxyquire": "^1.7.11",
-    "sinon": "^2.1.0",
-    "sinon-chai": "^2.9.0",
-    "watchify": "^3.9.0",
-    "yargs": "^7.1.0"
+    "sinon": "7.5.0",
+    "sinon-chai": "3.3.0"
   }
 }

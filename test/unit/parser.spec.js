@@ -6,7 +6,7 @@ module.exports = () => {
       const options = { customColors: { testColor: { fg: [1, 2, 3] } } };
       let pColorStub;
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         pColorStub = sandbox.stub().returns('special colorized string');
         parser = proxyquire('../lib/parser', {
           './settings': {
@@ -51,7 +51,7 @@ module.exports = () => {
       let dateColorStub;
 
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         stringColorStub = sandbox.stub().returns('string color');
         falseColorStub = sandbox.stub().returns('false color');
         trueColorStub = sandbox.stub().returns('true color');
@@ -132,7 +132,7 @@ module.exports = () => {
       let errorObj;
 
       beforeEach(() => {
-        sandbox = sinon.sandbox.create();
+        sandbox = sinon.createSandbox();
         errorMessageStub = sandbox.stub().returns('error message color');
         errorDividerStub = sandbox.stub().returns('error divider color');
         errorNameStub = sandbox.stub().returns('error name color');
