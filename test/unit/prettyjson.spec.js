@@ -22,10 +22,9 @@ describe('PrettyJSON', () => {
       sandbox.restore();
     });
 
-    it('Should reinitialize settings if passed customOptions argument', () => {
+    it('Should not reinitialize settings if passed customOptions argument', () => {
       prettyJson.render(null, 0, { test_key: 'test_val' });
-      expect(settingsInitStub).to.be.called.once;
-      expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
+      expect(settingsInitStub).to.not.be.called;
     });
 
     it('Should should sort keys correctly if option is set', () => {
