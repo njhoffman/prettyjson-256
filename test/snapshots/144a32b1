@@ -7,7 +7,7 @@ object1:
       - array_3
       - - nested_array_1
         - nested_array_2
-    - function1: [Function] function testFunc1()  }
+    - function1: [Function] function testFunc1() }
     - 12353252
     - object1: 
         embedded1: embedded1
@@ -24,7 +24,7 @@ array1:
   - item1
 bool1:         true
 number1:       3925.25
-function2:     [Function] function testFunc2()  }
+function2:     [Function] function testFunc2() }
 emptyArray1:   (empty array)
 emptyObject1:  {}
 emptyString:   (empty string)
@@ -39,5 +39,5 @@ nestedObject1:
           - item2
         bool1:     false
         number2:   52528352
-        function2: [Function] function testFunc3()  }
+        function2: [Function] function testFunc3() }
 func4:         [Function] function testFunc4() 

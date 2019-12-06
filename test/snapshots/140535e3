@@ -1,0 +1,18 @@
+[38;5;122mobject1: [0m
+  [38;5;122mobject1: [0m[38;5;252mobject_value1[0m
+  [38;5;122marray1: [0m [38;5;241m[Array length 6][0m
+  [38;5;122mobject2: [0m[38;5;252mobject_value2[0m
+[38;5;122marray1: [0m
+  [38;5;122m- [0m[38;5;252mitem2[0m
+  [38;5;122m- [0m[38;5;252mitem3[0m
+  [38;5;122m- [0m[38;5;252mitem1[0m
+[38;5;122mbool1: [0m        [38;5;189mtrue[0m
+[38;5;122mnumber1: [0m      [38;5;117m3925.25[0m
+[38;5;122mfunction2: [0m    [38;5;189m[Function] [0m[38;5;245mfunction testFunc2() }[0m
+[38;5;122memptyArray1: [0m  [38;5;244m(empty array)[0m
+[38;5;122memptyObject1: [0m [38;5;244m{}[0m
+[38;5;122memptyString: [0m  [38;5;244m(empty string)[0m
+[38;5;122mnestedObject1: [0m
+  [38;5;122mnestedObject2: [0m
+    [38;5;122mnestedObject3: [0m[38;5;241m[Object] (1 keys)[0m
+[38;5;122mfunc4: [0m        [38;5;189m[Function] [0m[38;5;245mfunction testFunc4() [0m

@@ -10,14 +10,14 @@ const integrationOther = require('./integration/other');
 console.clear();
 
 describe('Unit Tests', () => {
-  // unitPrettyJson();
-  // unitSettings();
-  // unitParser();
-  // unitUtils();
+  unitPrettyJson();
+  unitSettings();
+  unitParser();
+  unitUtils();
 });
 
 describe('Integrarion Tests', () => {
-  // integrationGeneralSettings();
+  integrationGeneralSettings();
   integrationColorSettings();
-  // integrationOther();
+  integrationOther();
 });

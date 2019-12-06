@@ -6,7 +6,7 @@ const colors = require('ansi-256-colors');
 const { render, init } = require('../../lib/prettyjson');
 
 const showOutput = false;
-const saveSnapshot = false;
+const saveSnapshot = true;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
@@ -69,8 +69,8 @@ const _testOutput = (testObj, expected, customOptions = {}) => {
   init(newOptions);
   const ret = render(testObj);
   const failOut = snapshot
-    ? `\n${colors.reset}(expected)\n${snapshot}\n(returned)\n${ret}\n`
-    : `\n${colors.reset}(returned)\n${ret}\n`;
+    ? `\n\n${colors.reset}--(expected)--\n${snapshot}\n\n--(returned)--\n${ret}\n\n`
+    : `\n${colors.reset}(returned)\n${ret}\n\n`;
 
   if (showOutput) {
     console.log(`\n${ret}\n`);

@@ -7,7 +7,7 @@
       [38;5;122m- [0m[38;5;252marray_3[0m
       [38;5;122m- [0m[38;5;122m- [0m[38;5;252mnested_array_1[0m
         [38;5;122m- [0m[38;5;252mnested_array_2[0m
-    [38;5;122m- [0m[38;5;196mfunction1: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc1()  }[0m
+    [38;5;122m- [0m[38;5;196mfunction1: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc1() }[0m
     [38;5;122m- [0m[38;5;117m12353252[0m
     [38;5;122m- [0m[38;5;196mobject1: [0m
         [38;5;196membedded1: [0m[38;5;252membedded1[0m
@@ -24,10 +24,10 @@
   [38;5;122m- [0m[38;5;252mitem1[0m
 [38;5;196mbool1: [0m        [38;5;189mtrue[0m
 [38;5;196mnumber1: [0m      [38;5;117m3925.25[0m
-[38;5;196mfunction2: [0m    [38;5;189m[Function] [0m[38;5;245mfunction testFunc2()  }[0m
-[38;5;196memptyArray1: [0m  [38;5;245m(empty array)[0m
-[38;5;196memptyObject1: [0m [38;5;245m{}[0m
-[38;5;196memptyString: [0m  [38;5;245m(empty string)[0m
+[38;5;196mfunction2: [0m    [38;5;189m[Function] [0m[38;5;245mfunction testFunc2() }[0m
+[38;5;196memptyArray1: [0m  [38;5;244m(empty array)[0m
+[38;5;196memptyObject1: [0m [38;5;244m{}[0m
+[38;5;196memptyString: [0m  [38;5;244m(empty string)[0m
 [38;5;196mnestedObject1: [0m
   [38;5;196mnestedObject2: [0m
     [38;5;196mnestedObject3: [0m
@@ -39,5 +39,5 @@
           [38;5;122m- [0m[38;5;252mitem2[0m
         [38;5;196mbool1: [0m    [38;5;224mfalse[0m
         [38;5;196mnumber2: [0m  [38;5;117m52528352[0m
-        [38;5;196mfunction2: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc3()  }[0m
+        [38;5;196mfunction2: [0m[38;5;189m[Function] [0m[38;5;245mfunction testFunc3() }[0m
 [38;5;196mfunc4: [0m        [38;5;189m[Function] [0m[38;5;245mfunction testFunc4() [0m
