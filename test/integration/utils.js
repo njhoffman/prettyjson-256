@@ -6,7 +6,7 @@ const colors = require('ansi-256-colors');
 const { render, init } = require('../../lib/prettyjson');
 
 const showOutput = false;
-const saveSnapshot = true;
+const saveSnapshot = false;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
@@ -35,6 +35,7 @@ const options = {
   }
 };
 
+/* eslint-disable no-console */
 const writeSnapshot = (name, data) => {
   const fullPath = path.resolve(__dirname, `../snapshots/${name}`);
   fs.writeFile(fullPath, data, err => {
@@ -56,11 +57,14 @@ const loadSnapshot = name => {
 const checksum = s => {
   let chk = 0x12345678;
   const len = s.length;
-  for (let i = 0; i < len; i++) {
+  let i;
+  for (i = 0; i < len; i += 1) {
     chk += s.charCodeAt(i) * (i + 1);
   }
   // returns 32-bit integer checksum encoded as a string containin it's hex value
+  /* eslint-disable no-bitwise */
   return (chk & 0xffffffff).toString(16);
+  /* eslint-enable no-bitwise */
 };
 
 const _testOutput = (testObj, expected, customOptions = {}) => {
@@ -83,6 +87,8 @@ const _testOutput = (testObj, expected, customOptions = {}) => {
   // expect(checksum(ret)).to.equal(expected);
   expect(checksum(ret), failOut).to.equal(expected);
 };
+
+/* eslint-enable no-console */
 
 module.exports = {
   _testOutput

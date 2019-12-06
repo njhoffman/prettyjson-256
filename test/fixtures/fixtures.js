@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 const testObj1 = {
   object1: {
     object1: 'object_value1',
@@ -53,7 +55,7 @@ const testMultiline1 = [
   'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 ].join('\n');
 
-exports = module.exports = {
+module.exports = {
   testObj1,
   testMultiline1
 };

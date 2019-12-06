@@ -7,7 +7,9 @@ const integrationGeneralSettings = require('./integration/generalSettings');
 const integrationColorSettings = require('./integration/colorSettings');
 const integrationOther = require('./integration/other');
 
+/* eslint-disable no-console */
 console.clear();
+/* eslint-enable no-console */
 
 describe('Unit Tests', () => {
   unitPrettyJson();
