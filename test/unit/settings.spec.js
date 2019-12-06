@@ -1,11 +1,13 @@
 describe('Settings', () => {
-  let sandbox, settings, getRgbStub;
+  let sandbox;
+  let settings;
+  let getRgbStub;
   describe('outputColorCodes', () => {
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
       getRgbStub = sandbox.stub();
       settings = proxyquire('../lib/settings', {
-        'ansi-256-colors' : {
+        'ansi-256-colors': {
           fg: {
             getRgb: getRgbStub
           },

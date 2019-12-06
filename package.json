@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "build": "babel -d ./dist ./lib -s",
-    "lint": "esw lib test",
+    "lint": "esw lib test --color",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha",

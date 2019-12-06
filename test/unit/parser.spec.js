@@ -1,8 +1,8 @@
 describe('Parser', () => {
-
-  let sandbox, parser;
+  let sandbox;
+  let parser;
   describe('CustomColor Indexes', () => {
-    let options = { customColors : { testColor: { fg: [1,2,3] } } };
+    const options = { customColors: { testColor: { fg: [1, 2, 3] } } };
     let pColorStub;
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
@@ -21,7 +21,6 @@ describe('Parser', () => {
       sandbox.restore();
     });
 
-
     it('Should correctly identify object keys that match initialized customColors', () => {
       const input = { testColor: 'This should be colorized' };
       parser(input);
@@ -35,7 +34,6 @@ describe('Parser', () => {
       expect(output).to.equal('special colorized string');
     });
 
-
     // if it's an objerct, customColors are assigned, and object has key that matches customColor value
     // parse({ testColor: 'This is a string to parse'
   });
@@ -43,8 +41,13 @@ describe('Parser', () => {
   // describe('object handling', () => {
   // });
   describe('Serializable Data', () => {
-    let options = { inlineArrays: true };
-    let stringColorStub, falseColorStub, trueColorStub, numberColorStub, emptyColorStub, dateColorStub;
+    const options = { inlineArrays: true };
+    let stringColorStub;
+    let falseColorStub;
+    let trueColorStub;
+    let numberColorStub;
+    let emptyColorStub;
+    let dateColorStub;
 
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
@@ -67,7 +70,7 @@ describe('Parser', () => {
           })
         }
       });
-    })
+    });
 
     afterEach(() => {
       sandbox.restore();
@@ -118,11 +121,14 @@ describe('Parser', () => {
       const output = parser(undefined);
       expect(output).to.equal('undefined');
     });
-
   });
   describe('Error Objects', () => {
-    let options = { errorDivider: '--error--' };
-    let errorMessageStub, errorDividerStub, errorNameStub, errorStackStub, errorObj;
+    const options = { errorDivider: '--error--' };
+    let errorMessageStub;
+    let errorDividerStub;
+    let errorNameStub;
+    let errorStackStub;
+    let errorObj;
 
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
@@ -130,8 +136,11 @@ describe('Parser', () => {
       errorDividerStub = sandbox.stub().returns('error divider color');
       errorNameStub = sandbox.stub().returns('error name color');
       errorStackStub = sandbox.stub().returns('error stack color');
-      try { throw new Error('test error message'); }
-      catch (err) { errorObj = err; }
+      try {
+        throw new Error('test error message');
+      } catch (err) {
+        errorObj = err;
+      }
       parser = proxyquire('../lib/parser', {
         './settings': {
           getOptions: () => options,
@@ -143,7 +152,7 @@ describe('Parser', () => {
           })
         }
       });
-    })
+    });
 
     afterEach(() => {
       sandbox.restore();
@@ -171,7 +180,6 @@ describe('Parser', () => {
       parser(errorObj);
       expect(errorStackStub).to.be.called.once;
     });
-
   });
   // describe('multiline strings', () => {
   // });

@@ -1,42 +1,42 @@
 const fs = require('fs');
 const path = require('path');
-const colors  = require('ansi-256-colors');
+const colors = require('ansi-256-colors');
 
 const { testObj1, testMultiline1 } = require('../fixtures/fixtures');
 const { render, init } = require('../../lib/prettyjson');
 
-let showOutput = true;
+const showOutput = true;
 
 // keep own version of defaultOptions so project can be changed without breaking fixtures
 // TODO: add options inlineIndent boolean
 const options = {
-  alphabetizeKeys:    false,
+  alphabetizeKeys: false,
   defaultIndentation: 2,
-  depth:              -1,
-  emptyArrayMsg:      '(empty array)',
-  emptyObjectMsg:     '{}',
-  emptyStringMsg:     '(empty string)',
-  noColor:            false,
-  numberArrays:       false,
-  showEmpty:          true,
-  colors:             {
-    boolFalse:        { fg: [5, 4, 4] },
-    boolTrue:         { fg: [4, 4, 5] },
-    dash:             { fg: [2, 5, 4] },
-    date:             { fg: [0, 5, 2] },
-    depth:            { fg: 9 },
-    empty:            { fg: 13 },
-    functionHeader:   { fg: 13 },
-    functionTag:      { fg: [4, 4, 5] },
-    keys:             { fg: [2, 5, 4] },
-    number:           { fg: [2, 4, 5] },
-    string:           null
+  depth: -1,
+  emptyArrayMsg: '(empty array)',
+  emptyObjectMsg: '{}',
+  emptyStringMsg: '(empty string)',
+  noColor: false,
+  numberArrays: false,
+  showEmpty: true,
+  colors: {
+    boolFalse: { fg: [5, 4, 4] },
+    boolTrue: { fg: [4, 4, 5] },
+    dash: { fg: [2, 5, 4] },
+    date: { fg: [0, 5, 2] },
+    depth: { fg: 9 },
+    empty: { fg: 13 },
+    functionHeader: { fg: 13 },
+    functionTag: { fg: [4, 4, 5] },
+    keys: { fg: [2, 5, 4] },
+    number: { fg: [2, 4, 5] },
+    string: null
   }
 };
 
 const writeSnapshot = (name, data) => {
   const fullPath = path.resolve(__dirname, `../snapshots/${name}`);
-  fs.writeFile(fullPath, data, (err) => {
+  fs.writeFile(fullPath, data, err => {
     if (err) {
       return console.error(err);
     }
@@ -44,7 +44,7 @@ const writeSnapshot = (name, data) => {
   });
 };
 
-const loadSnapshot = (name) => {
+const loadSnapshot = name => {
   const fullPath = path.resolve(__dirname, `../snapshots/${name}`);
   if (fs.existsSync(fullPath)) {
     return fs.readFileSync(fullPath);
@@ -52,11 +52,11 @@ const loadSnapshot = (name) => {
   return false;
 };
 
-const checksum = (s) => {
-  var chk = 0x12345678;
-  var len = s.length;
-  for (var i = 0; i < len; i++) {
-    chk += (s.charCodeAt(i) * (i + 1));
+const checksum = s => {
+  let chk = 0x12345678;
+  const len = s.length;
+  for (let i = 0; i < len; i++) {
+    chk += s.charCodeAt(i) * (i + 1);
   }
   // returns 32-bit integer checksum encoded as a string containin it's hex value
   return (chk & 0xffffffff).toString(16);
@@ -64,10 +64,11 @@ const checksum = (s) => {
 
 const _testOutput = (testObj, expected, customOptions = {}, showOutput = false, saveSnapshot = false) => {
   const snapshot = loadSnapshot(expected);
-  const newOptions = Object.assign(Object.assign({}, options), customOptions);
+  const newOptions = { ...options, ...customOptions };
   init(newOptions);
   const ret = render(testObj);
-  const failOut = snapshot ? `\n${colors.reset}(expected)\n${snapshot}\n(returned)\n${ret}\n`
+  const failOut = snapshot
+    ? `\n${colors.reset}(expected)\n${snapshot}\n(returned)\n${ret}\n`
     : `\n${colors.reset}(returned)\n${ret}\n`;
   showOutput && console.log(`\n${ret}\n`);
   // expect(checksum(ret)).to.equal(expected);
@@ -140,7 +141,7 @@ describe('Integration tests', () => {
 
     it('Should render correctly when setting "showEmpty" is modified', () => {
       const expected = '1942bb31';
-      testOutput(expected, { showEmpty : false });
+      testOutput(expected, { showEmpty: false });
     });
   });
 
@@ -165,9 +166,9 @@ describe('Integration tests', () => {
     });
 
     // it('Should render correct colors when setting "date" is modified', () => {
-      // had to remove date object from fixture because can't control output on different systems
-      // TODO: figure out a way to test it!
-      // const expected = '1b50e4f1';
+    // had to remove date object from fixture because can't control output on different systems
+    // TODO: figure out a way to test it!
+    // const expected = '1b50e4f1';
     // });
 
     it('Should render correct colors when setting "depth" is modified', () => {

@@ -1,7 +1,11 @@
 // TODO: Get rid of global pColor, restructure
 
 describe('PrettyJSON', () => {
-  let sandbox, settingsInitStub, parseStub, prettyJson, renderStub;
+  let sandbox;
+  let settingsInitStub;
+  let parseStub;
+  let prettyJson;
+  let renderStub;
 
   describe('render', () => {
     beforeEach(() => {
@@ -10,7 +14,7 @@ describe('PrettyJSON', () => {
       parseStub = sinon.stub();
       prettyJson = proxyquire('../lib/prettyjson', {
         './settings': { init: settingsInitStub },
-        './parser':  parseStub,
+        './parser': parseStub
       });
     });
 
@@ -27,7 +31,7 @@ describe('PrettyJSON', () => {
     it('Should should sort keys correctly if option is set', () => {
       prettyJson = proxyquire('../lib/prettyjson', {
         './settings': { init: settingsInitStub },
-        './parser':  parseStub
+        './parser': parseStub
       });
 
       const obj1 = { charlie: 'charlie_1', bravo: 'bravo_1', alpha: 'alpha_1' };
@@ -81,7 +85,7 @@ describe('PrettyJSON', () => {
       parseStub = sinon.stub();
       prettyJson = proxyquire('../lib/prettyjson', {
         './settings': { init: settingsInitStub },
-        './parser':  parseStub
+        './parser': parseStub
       });
       renderStub = sinon.stub(prettyJson, 'render');
     });
@@ -110,7 +114,7 @@ describe('PrettyJSON', () => {
 
     it('Should remove non-JSON characters from the beginning of input string', () => {
       prettyJson.renderString('JSDFK { "test_key": "test_val" }');
-      expect(renderStub).to.be.calledWith({ 'test_key': 'test_val' });
+      expect(renderStub).to.be.calledWith({ test_key: 'test_val' });
     });
 
     // it('Should return error message if string does not contain valid JSON', () => {
