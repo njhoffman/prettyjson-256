@@ -1,2 +1,0 @@
---require test/setup.js
---testFiles test/unit/*.js

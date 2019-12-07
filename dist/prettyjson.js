@@ -1,18 +1,12 @@
 'use strict';
 
-var _require = require('lodash'),
-    isArray = _require.isArray,
-    isObjectLike = _require.isObjectLike,
-    each = _require.each,
-    isEmpty = _require.isEmpty,
-    keys = _require.keys,
-    flattenDeep = _require.flattenDeep;
+var _ = require('lodash');
 
-var _require2 = require('./settings'),
-    getOptions = _require2.getOptions,
-    getPrintColor = _require2.getPrintColor,
-    outputColorCodes = _require2.outputColorCodes,
-    settingsInit = _require2.init;
+var _require = require('./settings'),
+    getOptions = _require.getOptions,
+    getPrintColor = _require.getPrintColor,
+    outputColorCodes = _require.outputColorCodes,
+    settingsInit = _require.init;
 
 var parse = require('./parser');
 
@@ -22,46 +16,39 @@ var maxSortDepth = 20;
 var currSortDepth = 0;
 var _sortKeys = function _sortKeys(data, parentIsArray) {
   var sortedData = parentIsArray && !getOptions().numberArrays ? [] : {};
-  each(keys(data).sort(), function (key) {
+  _.each(_.keys(data).sort(), function (key) {
     // continue recursion if item is object and not exceeding maximum depth
-    if (isObjectLike(data[key]) && currSortDepth < maxSortDepth) {
-      currSortDepth++;
-      if (isArray(data[key])) {
+    if (_.isObjectLike(data[key]) && currSortDepth < maxSortDepth) {
+      currSortDepth += 1;
+      if (_.isArray(data[key])) {
         sortedData[key] = _sortKeys(data[key], !getOptions().numberArrays);
       } else {
         sortedData[key] = _sortKeys(data[key]);
       }
+    } else if (_.isArray(sortedData)) {
+      sortedData.push(data[key]);
     } else {
-      if (isArray(sortedData)) {
-        sortedData.push(data[key]);
-      } else {
-        sortedData[key] = data[key];
-      }
+      sortedData[key] = data[key];
     }
   });
-  currSortDepth--;
+  currSortDepth -= 1;
   return sortedData;
-};
-
-var init = function init() {
-  var customOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  settingsInit(customOptions);
-  return render;
 };
 
 var render = function render(data) {
   var startIndent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var customOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  !isEmpty(customOptions) && settingsInit(customOptions);
-  if (getOptions().alphabetizeKeys) {
-    data = _sortKeys(data, isArray(data));
-  }
-  var ret = parse(data, startIndent);
+  var options = _.defaultsDeep(getOptions(), customOptions);
+  var alphabetizeKeys = options.alphabetizeKeys,
+      browser = options.browser;
+
+  var sortedData = alphabetizeKeys ? _sortKeys(data, _.isArray(data)) : data;
+
+  var ret = parse(sortedData, startIndent, options);
   // console.info('parse return', ret);
-  if (getOptions().browser) {
-    ret = flattenDeep(ret);
+  if (browser) {
+    ret = _.flattenDeep(ret);
     var messages = ret.filter(function (el, i) {
       return i % 2 === 0;
     });
@@ -75,7 +62,9 @@ var render = function render(data) {
 
 var renderString = function renderString(data, customOptions) {
   // called from direct entry of cli
-  !isEmpty(customOptions) && settingsInit(customOptions);
+  if (!_.isEmpty(customOptions)) {
+    settingsInit(customOptions);
+  }
 
   var output = '';
   var parsedData = void 0;
@@ -99,6 +88,13 @@ var renderString = function renderString(data, customOptions) {
 
   output += exports.render(parsedData);
   return output;
+};
+
+var init = function init() {
+  var customOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  settingsInit(customOptions);
+  return render;
 };
 
 exports = module.exports = {

@@ -1,14 +1,6 @@
 'use strict';
 
-var _require = require('lodash'),
-    each = _require.each,
-    clone = _require.clone,
-    cloneDeep = _require.cloneDeep,
-    defaultsDeep = _require.defaultsDeep,
-    keys = _require.keys,
-    isNumber = _require.isNumber,
-    times = _require.times;
-
+var _ = require('lodash');
 var ansiColors = require('ansi-256-colors');
 var customColors = require('./colors');
 
@@ -40,7 +32,7 @@ var defaultOptions = {
     dash: { fg: [2, 5, 4] },
     date: { fg: [0, 5, 2] },
     depth: { fg: [9] },
-    empty: { fg: [13] },
+    empty: { fg: [12] },
     functionHeader: { fg: [13] },
     functionTag: { fg: [4, 4, 5] },
     keys: { fg: [2, 5, 4] },
@@ -53,91 +45,82 @@ var defaultOptions = {
   },
   customColors: customColors
 };
-// customColors: {
-//   bold:          { fg: [23] },
-//   blue:          { fg: [0, 0, 3] },
-//   lightBlue:     { fg: [0, 0, 5] },
-//   darkBlue:      { fg: [0, 0, 3] },
-//   red:           { fg: [3, 0, 0] },
-//   lightRed:      { fg: [5, 0, 0] },
-//   darkRed:       { fg: [1, 0, 0] },
-//   green:         { fg: [0, 3, 0] },
-//   lightGreen:    { fg: [0, 5, 0] },
-//   darkGreen:     { fg: [0, 1, 0] },
-//   purple:        { fg: [1, 0, 3] },
-//   lightPurple:   { fg: [2, 0, 5] },
-//   darkPurple:    { fg: [1, 0, 1] },
-//   cyan:          { fg: [2, 3, 4] },
-//   lightCyan:     { fg: [2, 5, 5] },
-//   darkCyan:      { fg: [1, 2, 3] },
-//   yellow:        { fg: [4, 5, 0] },
-//   orange:        { fg: [5, 2, 0] },
-//   white:         { fg: [4, 4, 4] },
-//   gray:          { fg: [12] },
+
+var printColor = {};
+var options = _.cloneDeep(defaultOptions);
+var getOptions = function getOptions() {
+  return options;
+};
 
 var createColorBrowser = function createColorBrowser(colorMap) {
-  var printColor = {};
-  each(colorMap, function (val, key) {
-    printColor[key] = function (key, sInput) {
-      // console.info('print 1: ' + key + ' - ' +  sInput);
+  // const printColor = {};
+  _.each(colorMap, function (val, pKey) {
+    printColor[pKey] = function (key, sInput) {
+      // console.info('print 1: ' + key + ' - ' + sInput);
       if (options.noColor || !colorMap[key]) {
         return [sInput];
       }
       var cItem = ['%c ' + sInput];
       var colorCode = void 0;
-      var fg = _.has(colorMap, key + '.fg') ? colorMap[key].fg : false;
-      var bg = _.has(colorMap, key + '.bg') ? colorMap[key].bg : false;
+      var fg = _.has(colorMap, key + '.fg') ? [].concat(colorMap[key].fg) : false;
+      var bg = _.has(colorMap, key + '.bg') ? [].concat(colorMap[key].bg) : false;
 
       if (fg) {
-        colorCode = fg.length === 1 ? (11 * parseInt(fg)).toString(16) + (11 * parseInt(fg)).toString(16) + (11 * parseInt(fg)).toString(16) : (51 * parseInt(fg[0])).toString(16) + (51 * parseInt(fg[1])).toString(16) + (51 * parseInt(fg[2])).toString(16);
+        colorCode = fg.length === 1 ? (11 * parseInt(fg, 10)).toString(16) + (11 * parseInt(fg, 10)).toString(16) + (11 * parseInt(fg, 10)).toString(16) : (51 * parseInt(fg[0], 10)).toString(16) + (51 * parseInt(fg[1], 10)).toString(16) + (51 * parseInt(fg[2], 10)).toString(16);
         cItem.push('color: #' + colorCode);
       }
 
       if (bg) {
-        colorCode = bg.length === 1 ? times(3, 11.09 * parseInt(bg)).toString(16) : (51 * parseInt(bg[0])).toString(16) + (51 * parseInt(bg[1])).toString(16) + (51 * parseInt(bg[2])).toString(16);
+        colorCode = bg.length === 1 ? _.times(3, 11.09 * parseInt(bg, 10)).toString(16) : (51 * parseInt(bg[0], 10)).toString(16) + (51 * parseInt(bg[1], 10)).toString(16) + (51 * parseInt(bg[2], 10)).toString(16);
         cItem.push('background-color: #' + colorCode);
       }
       // console.info('print 2', cItem);
       return cItem;
-    }.bind(undefined, key);
+    }.bind(undefined, pKey);
   });
   return printColor;
 };
 
 var createColorTerminal = function createColorTerminal(colorMap) {
-  var printColor = {};
-  each(colorMap, function (val, key) {
-    printColor[key] = function (key, sInput) {
+  _.each(colorMap, function (val, pKey) {
+    printColor[pKey] = function (key, sInput) {
       if (!colorMap[key]) {
         return ansiColors.reset + sInput;
       }
       if (options.noColor) {
         return sInput;
       }
-      var cItem = colorMap[key].fg ? isNumber(colorMap[key].fg) ? ansiColors.fg.grayscale[colorMap[key].fg] : colorMap[key].fg.length === 3 ? ansiColors.fg.getRgb.apply(this, colorMap[key].fg) : '' : '';
-      cItem += (colorMap[key].bg ? isNumber(colorMap[key].bg) ? ansiColors.bg.grayscale[colorMap[key].bg] : colorMap[key].bg.length === 3 ? ansiColors.bg.getRgb.apply(this, colorMap[key].bg) : '' : '') + sInput + ansiColors.reset;
+
+      var cItem = '';
+
+      if (_.isNumber(colorMap[key].fg) || _.isArray(colorMap[key].fg) && colorMap[key].fg.length === 1) {
+        cItem = ansiColors.fg.grayscale[colorMap[key].fg];
+      } else if (_.isArray(colorMap[key].fg) && colorMap[key].fg.length === 3) {
+        cItem = ansiColors.fg.getRgb.apply(this, colorMap[key].fg);
+      }
+
+      if (_.isNumber(colorMap[key].bg) || _.isArray(colorMap[key].bg) && colorMap[key].bg.length === 1) {
+        cItem += ansiColors.bg.grayscale[colorMap[key].bg];
+      } else if (_.isArray(colorMap[key].bg) && colorMap[key].bg.length === 3) {
+        cItem += ansiColors.bg.getRgb.apply(this, colorMap[key].bg);
+      }
+      cItem += sInput + ansiColors.reset;
       return cItem;
-    }.bind(undefined, key);
+    }.bind(undefined, pKey);
   });
   return printColor;
 };
 
-var options = cloneDeep(defaultOptions);
-var getOptions = function getOptions() {
-  return options;
-};
-
-var printColor = void 0;
 var init = function init() {
   var customOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  options = defaultsDeep(customOptions, defaultOptions);
-  options.depth = parseInt(options.depth);
-  options.defaultIndentation = parseInt(options.defaultIndentation);
+  options = _.defaultsDeep(customOptions, defaultOptions);
+  options.depth = parseInt(options.depth, 10);
+  options.defaultIndentation = parseInt(options.defaultIndentation, 10);
 
-  var newColors = clone(options.colors);
+  var newColors = _.clone(options.colors);
   if (options.customColors) {
-    each(keys(options.customColors), function (key) {
+    _.each(_.keys(options.customColors), function (key) {
       newColors[key] = options.customColors[key];
     });
   }
@@ -148,16 +131,18 @@ var init = function init() {
   }
   return printColor;
 };
+
 var getPrintColor = function getPrintColor() {
   return printColor;
 };
 
 var outputColorCodes = function outputColorCodes() {
   var colorCodes = '';
-  for (var r = 0; r <= 5; r++) {
-    for (var g = 0; g <= 5; g++) {
-      for (var b = 0; b <= 5; b++) {
-        colorCodes += ansiColors.fg.getRgb(r, g, b) + ('[color ' + r + ', ' + g + ', ' + b + ']   ') + ansiColors.reset;
+  var rgb = [0, 0, 0];
+  for (rgb[0] = 0; rgb[0] <= 5; rgb[0] += 1) {
+    for (rgb[1] = 0; rgb[1] <= 5; rgb[1] += 1) {
+      for (rgb[2] = 0; rgb[2] <= 5; rgb[2] += 1) {
+        colorCodes += ansiColors.fg.getRgb(rgb[0], rgb[1], rgb[2]) + '[color ' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ']   ' + ansiColors.reset;
       }
       colorCodes += '\n';
     }

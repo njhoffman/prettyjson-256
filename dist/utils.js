@@ -6,32 +6,22 @@ var _getOwnPropertyNames2 = _interopRequireDefault(_getOwnPropertyNames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _require = require('lodash'),
-    keys = _require.keys,
-    isError = _require.isError,
-    isEmpty = _require.isEmpty,
-    isFunction = _require.isFunction,
-    isNumber = _require.isNumber,
-    isUndefined = _require.isUndefined,
-    isNull = _require.isNull,
-    isString = _require.isString,
-    isBoolean = _require.isBoolean,
-    isArray = _require.isArray,
-    isObjectLike = _require.isObjectLike;
+var _ = require('lodash');
 
 var indent = function indent(numSpaces) {
   var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-  if (!isNumber(numSpaces) || numSpaces <= 0) {
+  if (!_.isNumber(numSpaces) || numSpaces <= 0) {
     return data;
   }
+  var indented = data;
   var spaces = new Array(numSpaces + 1).join(' ');
-  if (isArray(data)) {
-    data[0] = spaces + data[0];
+  if (_.isArray(data)) {
+    indented[0] = spaces + data[0];
   } else {
-    data = spaces + data;
+    indented = spaces + data;
   }
-  return data;
+  return indented;
 };
 
 var getMaxIndexLength = function getMaxIndexLength(input) {
@@ -45,30 +35,29 @@ var getMaxIndexLength = function getMaxIndexLength(input) {
   return maxWidth;
 };
 
+var isCustomColor = function isCustomColor(data, customColors) {
+  return customColors && _.isObjectLike(data) && _.keys(data).length === 1 && !_.isEmpty(customColors[_.keys(data)[0]]);
+};
+
 // detect if an object can be output on same line
 var isSerializable = function isSerializable(input) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  if (isCustomColor(input, options.customColors) || isBoolean(input) || isNumber(input) || isFunction(input) || isUndefined(input) || isNull(input) || isString(input) && input.indexOf('\n') === -1 || input instanceof Date) {
+  if (isCustomColor(input, options.customColors) || _.isBoolean(input) || _.isNumber(input) || _.isFunction(input) || _.isUndefined(input) || _.isNull(input) || _.isString(input) && input.indexOf('\n') === -1 || input instanceof Date) {
     return true;
   }
 
   // empty objects and arrays rendered on the same line
-  if (isObjectLike(input) && isEmpty(input) && !isError(input)) {
+  if (_.isObjectLike(input) && _.isEmpty(input) && !_.isError(input)) {
     return true;
   }
 
-  if (options.inlineArrays && isArray(input)) {
-    options.inlineArrays = false;
+  if (options.inlineArrays && _.isArray(input)) {
     if (isSerializable(input[0], options)) {
       return true;
     }
   }
   return false;
-};
-
-var isCustomColor = function isCustomColor(data, customColors) {
-  return customColors && isObjectLike(data) && keys(data).length === 1 && !isEmpty(customColors[keys(data)[0]]);
 };
 
 module.exports = {
