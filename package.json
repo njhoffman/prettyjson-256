@@ -1,6 +1,6 @@
 {
   "name": "prettyjson-256",
-  "version": "1.5.22",
+  "version": "1.5.23",
   "description": "JSON Pretty Print in 256 colors with extras",
   "main": "dist/prettyjson.js",
   "scripts": {
