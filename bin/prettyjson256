@@ -28,7 +28,7 @@ const renderInputJson = (input) => {
     console.log(prettyjson.renderString(input, options));
   } else {
     // don't send string through formatter, just output it
-    console.log(input);
+    process.stdout.write(input);
   }
 };
 
