@@ -1,22 +1,44 @@
 #!/usr/bin/env node
 
-const prettyjson = require('../index.babel');
+/*
+ * `cat myjson.json | prettyjson256`
+ * executable for piping JSON or JSON containing stream through prettyjson-256 formatter
+ * streamed data can contain non-JSON data or JSON data on one or more lines, but will not highlight
+ * JSON data within non-JSON data if they are on the same line
+*/
+
 const fs = require('fs');
 const argv = require('minimist')(process.argv.slice(2));
+const prettyjson = require('../index.babel');
 
-let options = prettyjson._defaultOptions;
+const options = prettyjson._defaultOptions;
 
-let renderInputJson = (input) => {
-  console.log(prettyjson.renderString(input, options));
+const isJson = (str) => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
+const renderInputJson = (input) => {
+  // input should be full JSON element or non-JSON string
+  if (isJson(input)) {
+    console.log(prettyjson.renderString(input, options));
+  } else {
+    // don't send string through formatter, just output it
+    console.log(input);
+  }
 };
 
 if (argv._.length) {
   // First parameter is the file to read and parse
-  var filename = argv._[0];
+  const filename = argv._[0];
   try {
     renderInputJson(fs.readFileSync(filename, 'utf8'));
   } catch (e) {
-    console.error('Error reading: ' + filename );
+    console.error(`Error reading: ${filename} `);
     console.error(e);
     console.error(e.stack);
     process.exit(1);
@@ -24,10 +46,12 @@ if (argv._.length) {
 } else {
   // Read input stream
 
-  var streamData = '';
+  let streamData = '';
 
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
+
+  // depending on input stream, full JSON element could be on single line or split between many lines
   process.stdin.on('data', (chunk) => {
     if (chunk === '\n') {
       renderInputJson(streamData);
@@ -35,13 +59,20 @@ if (argv._.length) {
       return;
     } else if (/\n$/.test(chunk)) {
       streamData += chunk;
-      streamData.split('\n').forEach(renderInputJson);
+      if (isJson(streamData)) {
+        // JSON contained on one line
+        renderInputJson(streamData);
+      } else {
+        // JSON split over many lines
+        streamData.split('\n').forEach(renderInputJson);
+      }
       streamData = '';
       return;
     }
     streamData += chunk;
   });
-  process.stdin.on('end', function(){
+
+  process.stdin.on('end', () => {
     renderInputJson(streamData);
   });
 }
