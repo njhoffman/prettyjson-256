@@ -11,17 +11,9 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha",
     "test:watch": "mocha --watch --reporter spec",
-    "test:coverage": "better-npm-run coverage",
+    "test:coverage": "NODE_ENV=test nyc --reporter=text --reporter=text-summary mocha",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "changelog": "git log $(git describe --tags --abbrev=0)..HEAD --pretty='* %s' --first-parent"
-  },
-  "betterScripts": {
-    "coverage": {
-      "command": "./node_modules/.bin/istanbul cover --dir ./coverage --report text --report lcov node_modules/.bin/_mocha -- --opts ./test/mocha.opts --reporter spec",
-      "env": {
-        "NODE_ENV": "test"
-      }
-    }
   },
   "keywords": [
     "json",
@@ -55,14 +47,12 @@
   "devDependencies": {
     "babel-eslint": "10.0.3",
     "babel-plugin-add-module-exports": "1.0.2",
-    "babel-plugin-istanbul": "^4.1.3",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-typecheck": "^3.9.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "6.26.0",
-    "better-npm-run": "0.0.15",
     "chai": "^3.5.0",
     "chai-as-promised": "7.1.1",
     "coveralls": "^2.11.15",
@@ -75,9 +65,9 @@
     "eslint-plugin-prettier": "3.1.1",
     "eslint-plugin-promise": "4.2.1",
     "eslint-watch": "6.0.1",
-    "istanbul": "^1.0.0-alpha.2",
     "mocha": "6.2.2",
     "mocha-lcov-reporter": "1.3.0",
+    "nyc": "14.1.1",
     "prettier": "1.19.1",
     "proxyquire": "2.1.3",
     "sinon": "7.5.0",

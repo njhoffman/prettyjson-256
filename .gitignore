@@ -1,6 +1,7 @@
 .DS_STORE
 *.log
 .coverage-cache/
+.nyc_output/
 coverage/
 
 node_modules
