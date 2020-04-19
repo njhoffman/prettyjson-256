@@ -60,8 +60,8 @@ module.exports = () => {
         const printColor = settings.init(customOptions);
         expect(printColor).to.have.property('testColor1');
         expect(printColor).to.have.property('testColor2');
-        expect(printColor.testColor1).to.be.a.function;
-        expect(printColor.testColor2).to.be.a.function;
+        expect(printColor.testColor1).to.be.a('function');
+        expect(printColor.testColor2).to.be.a('function');
       });
 
       // TODO: implement error handling if customColors configured wrong

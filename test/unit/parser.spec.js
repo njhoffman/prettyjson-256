@@ -25,7 +25,7 @@ module.exports = () => {
       it('Should correctly identify object keys that match initialized customColors', () => {
         const input = { testColor: 'This should be colorized' };
         parser(input);
-        expect(pColorStub).to.be.called.once;
+        expect(pColorStub).to.be.calledOnce;
         expect(pColorStub).to.be.calledWith('This should be colorized');
       });
 
@@ -80,37 +80,37 @@ module.exports = () => {
       it('Should format string correctly', () => {
         const output = parser('testing string');
         expect(output).to.equal('string color');
-        expect(stringColorStub).to.be.called.once;
+        expect(stringColorStub).to.be.calledOnce;
       });
 
       it('Should format number correctly', () => {
         const output = parser(5);
         expect(output).to.equal('number color');
-        expect(numberColorStub).to.be.called.once;
+        expect(numberColorStub).to.be.calledOnce;
       });
 
       it('Should format true correctly', () => {
         const output = parser(true);
         expect(output).to.equal('true color');
-        expect(trueColorStub).to.be.called.once;
+        expect(trueColorStub).to.be.calledOnce;
       });
 
       it('Should format false correctly', () => {
         const output = parser(false);
         expect(output).to.equal('false color');
-        expect(falseColorStub).to.be.called.once;
+        expect(falseColorStub).to.be.calledOnce;
       });
 
       it('Should format null correctly', () => {
         const output = parser(null);
         expect(output).to.equal('empty color');
-        expect(emptyColorStub).to.be.called.once;
+        expect(emptyColorStub).to.be.calledOnce;
       });
 
       it('Should format a date correctly', () => {
         const output = parser(new Date());
         expect(output).to.equal('date color');
-        expect(dateColorStub).to.be.called.once;
+        expect(dateColorStub).to.be.calledOnce;
       });
 
       it('Should format an inline array correctly', () => {
@@ -161,25 +161,25 @@ module.exports = () => {
 
       it('Should format error name correctly', () => {
         parser(errorObj);
-        expect(errorNameStub).to.be.called.once;
+        expect(errorNameStub).to.be.calledOnce;
         expect(errorNameStub).to.be.calledWith('Error');
       });
 
       it('Should format error message correctly', () => {
         parser(errorObj);
-        expect(errorMessageStub).to.be.called.once;
+        expect(errorMessageStub).to.be.calledOnce;
         expect(errorMessageStub).to.be.calledWith('test error message');
       });
 
       it('Should format error divider correctly', () => {
         parser(errorObj);
-        expect(errorDividerStub).to.be.called.twice;
+        expect(errorDividerStub).to.be.calledTwice;
         expect(errorDividerStub).to.be.calledWith('--error--');
       });
 
       it('Should format error stack correctly', () => {
         parser(errorObj);
-        expect(errorStackStub).to.be.called.once;
+        expect(errorStackStub).to.be.calledOnce;
       });
     });
     // describe('multiline strings', () => {

@@ -49,7 +49,7 @@ module.exports = () => {
       it('Should call recursive render with data and indent arguments', () => {
         const obj1 = { charlie: 'charlie_1', bravo: 'bravo_1', alpha: 'alpha_1' };
         prettyJson.render(obj1, 2);
-        expect(parseStub).to.be.called.once;
+        expect(parseStub).to.be.calledOnce;
         expect(parseStub).to.be.calledWith(obj1, 2);
       });
     });
@@ -69,7 +69,7 @@ module.exports = () => {
 
       it('Should initialize settings module', () => {
         prettyJson.init(null);
-        expect(settingsInitStub).to.be.called.once;
+        expect(settingsInitStub).to.be.calledOnce;
       });
 
       it('Should initialize settings with customOptions', () => {
@@ -96,7 +96,7 @@ module.exports = () => {
 
       it('Should reinitialize settings if passed customOptions argument', () => {
         prettyJson.renderString(null, { test_key: 'test_val' });
-        expect(settingsInitStub).to.be.called.once;
+        expect(settingsInitStub).to.be.calledOnce;
         expect(settingsInitStub).to.be.calledWith({ test_key: 'test_val' });
       });
 
@@ -109,7 +109,7 @@ module.exports = () => {
 
       it('Should render data if JSON is parsed correctly', () => {
         prettyJson.renderString('{ "test_key": "test_val" }');
-        expect(renderStub).to.be.called.once;
+        expect(renderStub).to.be.calledOnce;
       });
 
       it('Should remove non-JSON characters from the beginning of input string', () => {
