@@ -40,7 +40,7 @@
     "ansi-256-colors": "1.1.0",
     "babel-cli": "6.26.0",
     "babel-runtime": "6.26.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "minimist": "^1.2.5",
     "vm": "^0.1.0"
   },
